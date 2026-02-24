@@ -1,251 +1,165 @@
 "use client"
 
-import { useRef } from "react"
-import Image from "next/image"
-import { motion, useInView } from "framer-motion"
-import { Award, Heart, Shield, Target, Trophy, Medal } from "lucide-react"
+import Header from "@/components/header"
+import Footer from "@/components/footer"
+import { useReveal } from "@/hooks/use-reveal"
+
+const philosophy = [
+  {
+    title: "BUILT BY MANY HANDS",
+    desc: "Crown Allstar's international journey has been powered by a village — ICU sponsorships, government support through KONI, and the collective sacrifice of our athletes and families. Every trip to the world stage is proof that cheerleading in Indonesia is worth investing in.",
+  },
+  {
+    title: "TEAM OVER EVERYTHING",
+    desc: "Individual glory means nothing in cheerleading. Every stunt, every pyramid, every routine depends on total trust in your teammates. We were chosen to represent Indonesia — not as individuals, but as one team.",
+  },
+  {
+    title: "FAIL FORWARD",
+    desc: "Every fall teaches you something. From our early days in Bandung to the ICU World stage in Florida — we turned setbacks into comebacks. 16 national titles didn't come easy.",
+  },
+  {
+    title: "REPRESENT WITH PRIDE",
+    desc: "When we step on the mat, we carry the flag. Selected as Indonesia's National Team in 2012 and 2014, and continuing to represent at ICU Asian and World Championships — we prove Indonesian cheerleading belongs on the global stage.",
+  },
+]
 
 export default function AboutPage() {
-  const philosophyRef = useRef(null)
-  const teamRef = useRef(null)
-  const awardsRef = useRef(null)
-
-  const philosophyInView = useInView(philosophyRef, { once: true, amount: 0.3 })
-  const teamInView = useInView(teamRef, { once: true, amount: 0.3 })
-  const awardsInView = useInView(awardsRef, { once: true, amount: 0.3 })
+  useReveal()
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="pt-24 md:pt-32">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              About CROWN ALLSTAR
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-muted-foreground"
-            >
-              Founded in 2008, CROWN ALLSTAR has grown to become Indonesia's premier cheerleading team with a legacy of
-              excellence, teamwork, and championship victories.
-            </motion.p>
+      <Header />
+
+      {/* ── HERO ── */}
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 bg-black" />
+        <div className="absolute inset-0 grid-overlay opacity-30" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-32">
+          <div className="max-w-3xl reveal">
+            <div className="gold-line mb-6" />
+            <h1 className="font-display text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-white mb-6">
+              MORE THAN<br />
+              A <span className="text-[hsl(45,93%,58%)]">TEAM</span>
+            </h1>
+            <p className="text-white/50 text-lg md:text-xl leading-relaxed max-w-lg">
+              Crown Allstar is ICA&apos;s prototype team — born in Bandung on September 23, 2007.
+              What started as a small group of passionate athletes has become one of Indonesia&apos;s
+              most decorated cheerleading programs, with 16 consecutive national titles and 
+              international medals on three continents.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-16 md:py-24 bg-muted" ref={philosophyRef}>
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bold mb-6">Our Philosophy</h2>
-              <p className="text-muted-foreground mb-6">
-                At CROWN ALLSTAR, we believe that cheerleading is more than just a sport—it's a way of life that
-                instills discipline, teamwork, and perseverance. Our philosophy centers around three core principles:
+      {/* ── OUR STORY ── */}
+      <section className="bg-[hsl(0,0%,6%)]">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div className="lg:col-span-5 reveal">
+              <div className="gold-line mb-6" />
+              <h2 className="font-display text-5xl md:text-6xl text-white">
+                THE<br />
+                <span className="text-[hsl(45,93%,58%)]">STORY</span>
+              </h2>
+            </div>
+            <div className="lg:col-span-7 space-y-6 reveal reveal-delay-1">
+              <p className="text-white/60 text-lg leading-relaxed">
+                Crown Allstar was born in Bandung, Jawa Barat — as the prototype team of the 
+                Indonesian Cheer Association (ICA). From day one, the mission was clear: build 
+                the most competitive cheerleading program in the country, and take it global.
               </p>
-              <div className="space-y-6">
-                {[
-                  {
-                    icon: <Target className="h-6 w-6 text-primary" />,
-                    title: "Excellence",
-                    description:
-                      "We strive for excellence in every aspect of our performance, training, and competition.",
-                  },
-                  {
-                    icon: <Heart className="h-6 w-6 text-primary" />,
-                    title: "Unity",
-                    description:
-                      "We believe in the power of teamwork and supporting each other through every challenge.",
-                  },
-                  {
-                    icon: <Shield className="h-6 w-6 text-primary" />,
-                    title: "Resilience",
-                    description: "We embrace challenges as opportunities to grow stronger and more determined.",
-                  },
-                ].map((value, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                    className="flex items-start"
-                  >
-                    <div className="mr-4 mt-1">{value.icon}</div>
-                    <div>
-                      <h3 className="text-lg font-semibold mb-1">{value.title}</h3>
-                      <p className="text-muted-foreground">{value.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
+              <p className="text-white/40 leading-relaxed">
+                The journey required support from every direction. ICU sponsored flights 
+                and accommodation for the World Cup in 2012 and 2014. KONI stepped in to 
+                help fund the Asian Championship trip to Singapore. Athletes and families 
+                contributed what they could. It took a collective effort — and Crown Allstar 
+                made every opportunity count.
+              </p>
+              <p className="text-white/40 leading-relaxed">
+                We kept winning nationally — 6 consecutive titles became 10, then 14, then 16. 
+                We earned bronze at the ICU Asian Championship in 2023, silver at BICO, gold 
+                at APCC 2024, and were selected again for the ICU World Championship. Every 
+                medal was earned through relentless training and the combined support of 
+                everyone who believed in Indonesian cheerleading.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PHILOSOPHY ── */}
+      <section className="bg-[hsl(0,0%,4%)] diagonal-stripe">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-32">
+          <div className="mb-20 reveal">
+            <div className="gold-line mb-6" />
+            <h2 className="font-display text-5xl md:text-7xl text-white">
+              HOW WE<br />
+              <span className="text-[hsl(45,93%,58%)]">THINK</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            {philosophy.map((item, i) => (
+              <div
+                key={i}
+                className={`reveal reveal-delay-${(i % 4) + 1} group border border-white/5 p-10 hover:bg-white/[0.02] transition-all duration-500`}
+              >
+                <span className="text-[hsl(45,93%,58%)]/40 font-display text-5xl block mb-4 group-hover:text-[hsl(45,93%,58%)] transition-colors">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-xl text-white tracking-wider mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-white/40 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="relative h-[400px] rounded-lg overflow-hidden"
-            >
-              <Image
-                src="/placeholder.svg?height=400&width=600"
-                alt="CROWN ALLSTAR Philosophy"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 md:py-24 bg-background" ref={teamRef}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={teamInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="text-3xl md:text-4xl font-bold mb-4"
-            >
-              Meet Our Team
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={teamInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-muted-foreground max-w-2xl mx-auto"
-            >
-              Our success is built on the dedication and talent of our coaches and team members.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                name: "David Wilson",
-                role: "Head Coach",
-                image: "/placeholder.svg?height=300&width=300",
-              },
-              {
-                name: "Maria Rodriguez",
-                role: "Choreographer",
-                image: "/placeholder.svg?height=300&width=300",
-              },
-              {
-                name: "Budi Santoso",
-                role: "Team Captain",
-                image: "/placeholder.svg?height=300&width=300",
-              },
-              {
-                name: "Lina Wijaya",
-                role: "Assistant Coach",
-                image: "/placeholder.svg?height=300&width=300",
-              },
-            ].map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={teamInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow"
-              >
-                <div className="relative h-64">
-                  <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-semibold">{member.name}</h3>
-                  <p className="text-muted-foreground">{member.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={teamInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-16 relative h-[400px] rounded-lg overflow-hidden"
-          >
-            <Image
-              src="/placeholder.svg?height=400&width=1200"
-              alt="CROWN ALLSTAR Full Team"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Awards Section */}
-      <section className="py-16 md:py-24 bg-muted" ref={awardsRef}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={awardsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="text-3xl md:text-4xl font-bold mb-4"
-            >
-              Our Achievements
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={awardsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-muted-foreground max-w-2xl mx-auto"
-            >
-              A legacy of excellence and championship victories.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "National Championships",
-                count: "12",
-                years: "2010-2023",
-                icon: <Award className="h-10 w-10 text-primary" />,
-              },
-              {
-                title: "Asian Championships",
-                count: "5",
-                years: "2015, 2017, 2019, 2021, 2023",
-                icon: <Trophy className="h-10 w-10 text-primary" />,
-              },
-              {
-                title: "World Championships",
-                count: "3",
-                years: "2018, 2020, 2022",
-                icon: <Medal className="h-10 w-10 text-primary" />,
-              },
-            ].map((award, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={awardsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-card rounded-lg p-6 shadow-sm border border-border text-center"
-              >
-                <div className="flex justify-center mb-4">{award.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{award.title}</h3>
-                <div className="text-4xl font-bold text-primary mb-2">{award.count}</div>
-                <p className="text-muted-foreground">{award.years}</p>
-              </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── QUICK FACTS ── */}
+      <section className="bg-[hsl(0,0%,6%)]">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-32">
+          <div className="mb-20 reveal">
+            <div className="gold-line mb-6" />
+            <h2 className="font-display text-5xl md:text-7xl text-white">
+              AT A<br />
+              <span className="text-[hsl(45,93%,58%)]">GLANCE</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 reveal reveal-delay-1">
+            {[
+              { label: "Founded", value: "September 23, 2007 — Bandung" },
+              { label: "Status", value: "ICA Prototype Team — Jawa Barat" },
+              { label: "National Titles", value: "16× ICANC Champion (2009–2025)" },
+              { label: "National Team", value: "Selected in 2012 & 2014 (USA)" },
+              { label: "ICU Asian 2023", value: "🥉 Bronze Medal" },
+              { label: "BICO 2023", value: "🥈 Silver Medal" },
+              { label: "ICU APCC 2024", value: "🥇 Gold Medal" },
+              { label: "World Championship", value: "ICU World Cup — Florida, USA" },
+              { label: "Asian Invitational", value: "3rd Place — Singapore 2015" },
+              { label: "Bali Open 2015", value: "Competed" },
+              { label: "Disciplines", value: "Stunts, Tumbling, Dance, Pyramids, Group Stunts" },
+              { label: "Motto", value: "#CA4L — Crown Allstar for Life" },
+            ].map((fact, i) => (
+              <div key={i} className="flex border-b border-white/5 pb-4">
+                <span className="text-white/30 text-sm w-44 shrink-0 tracking-[0.1em] uppercase">
+                  {fact.label}
+                </span>
+                <span className="text-white/70 text-sm">
+                  {fact.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </>
   )
 }

@@ -1,101 +1,113 @@
 import Link from "next/link"
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
   return (
-    <footer className="bg-muted py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">CROWN ALLSTAR</h3>
-            <p className="text-muted-foreground">
-              Premier cheerleading team with a history of excellence and championship wins.
+    <footer className="bg-[hsl(0,0%,4%)] border-t border-white/5">
+      {/* Top */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          {/* Brand */}
+          <div className="md:col-span-5">
+            <div className="mb-6 flex items-center gap-3">
+              <Image
+                src="/logo-crown-sm.png"
+                alt="Crown Allstar"
+                width={50}
+                height={50}
+                className="opacity-90"
+              />
+              <div>
+                <span className="font-display text-3xl tracking-wider text-white">
+                  CROWN
+                </span>
+                <span className="font-display text-3xl tracking-wider text-[hsl(45,93%,58%)] ml-1">
+                  ALLSTAR
+                </span>
+              </div>
+            </div>
+            <p className="text-white/40 text-sm leading-relaxed max-w-sm">
+              Est. September 23, 2007 — Bandung, Jawa Barat. 16× ICANC National Champion.
+              ICA member. Representing Indonesia on the world stage. #CA4L
             </p>
-            <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Youtube className="h-5 w-5" />
-                <span className="sr-only">YouTube</span>
-              </Link>
+            <div className="flex gap-5 mt-8">
+              <a
+                href="https://www.instagram.com/crownallstar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-[hsl(45,93%,58%)] transition-colors text-sm tracking-[0.15em]"
+              >
+                INSTAGRAM
+              </a>
+              <a
+                href="https://www.tiktok.com/@crownallstar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-[hsl(45,93%,58%)] transition-colors text-sm tracking-[0.15em]"
+              >
+                TIKTOK
+              </a>
+              <a
+                href="https://youtube.com/@crownallstar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-[hsl(45,93%,58%)] transition-colors text-sm tracking-[0.15em]"
+              >
+                YOUTUBE
+              </a>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Home
+          {/* Links */}
+          <div className="md:col-span-3 md:col-start-7">
+            <h4 className="text-[13px] font-semibold tracking-[0.2em] text-white/50 mb-6">
+              NAVIGATE
+            </h4>
+            <nav className="flex flex-col gap-3">
+              {[
+                { name: "Home", href: "/" },
+                { name: "About Us", href: "/about" },
+                { name: "Our Journey", href: "/history" },
+                { name: "Contact", href: "/contact" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-white/40 hover:text-white transition-colors text-sm"
+                >
+                  {link.name}
                 </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/history" className="text-muted-foreground hover:text-primary transition-colors">
-                  History
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
+              ))}
+            </nav>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Programs</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Youth Program
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Junior Team
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Senior Team
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Elite Squad
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-            <address className="not-italic text-muted-foreground space-y-2">
-              <p>123 Cheer Avenue</p>
+          {/* Contact */}
+          <div className="md:col-span-3">
+            <h4 className="text-[13px] font-semibold tracking-[0.2em] text-white/50 mb-6">
+              CONTACT
+            </h4>
+            <div className="flex flex-col gap-3 text-sm text-white/40">
               <p>Jakarta, Indonesia</p>
-              <p>Phone: (123) 456-7890</p>
-              <p>Email: info@crownallstar.com</p>
-            </address>
+              <a href="https://wa.me/6281324420183" className="hover:text-white transition-colors">
+                +62 813-2442-0183
+              </a>
+              <a href="mailto:crownallstar@gmail.com" className="hover:text-white transition-colors">
+                crownallstar@gmail.com
+              </a>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} CROWN ALLSTAR. All rights reserved.</p>
+      {/* Bottom */}
+      <div className="border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/20 text-xs tracking-wider">
+            © {new Date().getFullYear()} CROWN ALLSTAR. ALL RIGHTS RESERVED.
+          </p>
+          <p className="text-white/10 text-xs">
+            BUILT WITH 🔥 IN JAKARTA
+          </p>
         </div>
       </div>
     </footer>

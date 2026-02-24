@@ -1,379 +1,289 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
-import { motion } from "framer-motion"
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
-import { Button } from "@/components/ui/button"
+import Header from "@/components/header"
+import Footer from "@/components/footer"
+import { useReveal } from "@/hooks/use-reveal"
 
 export default function ContactPage() {
-  const { toast } = useToast()
+  useReveal()
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    subject: "",
+    age: "",
+    experience: "none",
     message: "",
-    interest: "general",
-    experience: "",
   })
-  const [errors, setErrors] = useState<Record<string, string>>({})
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    // Clear error when user types
-    if (errors[name]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
-    }
-  }
-
-  const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, experience: value }))
-    if (errors.experience) {
-      setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors.experience
-        return newErrors
-      })
-    }
-  }
-
-  const handleRadioChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, interest: value }))
-  }
-
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
-
-    if (!formData.name.trim()) newErrors.name = "Name is required"
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required"
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid"
-    }
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required"
-    if (!formData.message.trim()) newErrors.message = "Message is required"
-    if (!formData.experience) newErrors.experience = "Please select your experience level"
-
-    return newErrors
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const newErrors = validateForm()
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
-      return
-    }
-
-    // Format message for WhatsApp
-    const message = `*New Contact from CROWN ALLSTAR Website*
+    const text = `*Crown Allstar — New Inquiry*
 Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone || "Not provided"}
-Subject: ${formData.subject}
-Interest: ${formData.interest}
+Phone: ${formData.phone}
+Age: ${formData.age || "Not specified"}
 Experience: ${formData.experience}
 
 Message:
 ${formData.message}`
 
-    // Format phone number (remove any non-digit characters)
-    const phoneNumber = "087700600208".replace(/\D/g, "")
-
-    // Create WhatsApp URL
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, "_blank")
-
-    // Show success message
-    toast({
-      title: "Message Ready to Send!",
-      description: "You'll be redirected to WhatsApp to complete your message.",
-    })
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-      interest: "general",
-      experience: "",
-    })
+    const waUrl = `https://wa.me/6281324420183?text=${encodeURIComponent(text)}`
+    window.open(waUrl, "_blank")
   }
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="pt-24 md:pt-32">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              Contact Us
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-muted-foreground"
-            >
-              Have questions or want to join our team? We'd love to hear from you!
-            </motion.p>
+      <Header />
+
+      {/* ── HERO ── */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 bg-black" />
+        <div className="absolute inset-0 grid-overlay opacity-30" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-32">
+          <div className="max-w-3xl reveal">
+            <div className="gold-line mb-6" />
+            <h1 className="font-display text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-white mb-6">
+              LET&apos;S<br />
+              <span className="text-[hsl(45,93%,58%)]">TALK</span>
+            </h1>
+            <p className="text-white/50 text-lg md:text-xl leading-relaxed max-w-lg">
+              Interested in joining Crown Allstar? Have questions about our programs?
+              Drop us a message — we&apos;ll get back to you fast.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="py-16 md:py-24 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
-              <p className="text-muted-foreground mb-8">
-                Fill out the form and our team will get back to you within 24 hours.
-              </p>
+      {/* ── FORM + INFO ── */}
+      <section className="bg-[hsl(0,0%,4%)]">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            {/* Left — Contact Info */}
+            <div className="lg:col-span-4 reveal">
+              <div className="space-y-10">
+                <div>
+                  <h3 className="text-[13px] tracking-[0.2em] text-white/50 mb-3">
+                    WHATSAPP
+                  </h3>
+                  <a
+                    href="https://wa.me/6281324420183"
+                    className="text-white text-lg hover:text-[hsl(45,93%,58%)] transition-colors"
+                  >
+                    +62 813-2442-0183
+                  </a>
+                </div>
 
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <MapPin className="h-6 w-6 text-primary mr-4 mt-1" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Our Location</h3>
-                    <p className="text-muted-foreground">123 Cheer Avenue, Jakarta, Indonesia</p>
+                <div>
+                  <h3 className="text-[13px] tracking-[0.2em] text-white/50 mb-3">
+                    EMAIL
+                  </h3>
+                  <a
+                    href="mailto:crownallstar@gmail.com"
+                    className="text-white text-lg hover:text-[hsl(45,93%,58%)] transition-colors"
+                  >
+                    crownallstar@gmail.com
+                  </a>
+                </div>
+
+                <div>
+                  <h3 className="text-[13px] tracking-[0.2em] text-white/50 mb-3">
+                    LOCATION
+                  </h3>
+                  <p className="text-white/60">
+                    Jakarta, Indonesia
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-[13px] tracking-[0.2em] text-white/50 mb-3">
+                    SOCIAL
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    <a
+                      href="https://www.instagram.com/crownallstar"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/40 hover:text-[hsl(45,93%,58%)] transition-colors text-sm"
+                    >
+                      @crownallstar — Instagram
+                    </a>
+                    <a
+                      href="https://www.tiktok.com/@crownallstar"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/40 hover:text-[hsl(45,93%,58%)] transition-colors text-sm"
+                    >
+                      @crownallstar — TikTok
+                    </a>
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <Phone className="h-6 w-6 text-primary mr-4 mt-1" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-muted-foreground">(123) 456-7890</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <Mail className="h-6 w-6 text-primary mr-4 mt-1" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-muted-foreground">info@crownallstar.com</p>
+                {/* Training Schedule */}
+                <div className="border border-white/10 p-8 mt-8">
+                  <h3 className="font-display text-xl text-white tracking-wider mb-4">
+                    TRAINING SCHEDULE
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-white/40">Monday</span>
+                      <span className="text-white/70">18:00 — 21:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/40">Wednesday</span>
+                      <span className="text-white/70">18:00 — 21:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/40">Saturday</span>
+                      <span className="text-white/70">10:00 — 14:00</span>
+                    </div>
+                    <div className="border-t border-white/5 pt-3 mt-3">
+                      <p className="text-white/30 text-xs">
+                        Schedule may vary during competition season
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-8">
-                <h3 className="font-semibold mb-4">Follow Us</h3>
-                <div className="flex space-x-4">
-                  <a
-                    href="#"
-                    className="bg-card p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
-                    <Facebook className="h-5 w-5" />
-                    <span className="sr-only">Facebook</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-card p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
-                    <Instagram className="h-5 w-5" />
-                    <span className="sr-only">Instagram</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-card p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
-                    <Twitter className="h-5 w-5" />
-                    <span className="sr-only">Twitter</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-card p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
-                    <Youtube className="h-5 w-5" />
-                    <span className="sr-only">YouTube</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <form onSubmit={handleSubmit} className="bg-card p-6 rounded-lg shadow-sm border border-border">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">
-                      Name <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
+            {/* Right — Form */}
+            <div className="lg:col-span-8 reveal reveal-delay-1">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="text-[13px] tracking-[0.15em] text-white/50 block mb-3"
+                    >
+                      NAME *
+                    </label>
+                    <input
                       id="name"
                       name="name"
+                      type="text"
+                      required
                       value={formData.name}
                       onChange={handleChange}
-                      className={errors.name ? "border-red-500" : ""}
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[hsl(45,93%,58%)] focus:outline-none transition-colors placeholder:text-white/15"
+                      placeholder="Your full name"
                     />
-                    {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">
-                      Email <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="text-[13px] tracking-[0.15em] text-white/50 block mb-3"
+                    >
+                      WHATSAPP NUMBER *
+                    </label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
                       onChange={handleChange}
-                      className={errors.email ? "border-red-500" : ""}
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[hsl(45,93%,58%)] focus:outline-none transition-colors placeholder:text-white/15"
+                      placeholder="08xx-xxxx-xxxx"
                     />
-                    {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">
-                      Subject <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <label
+                      htmlFor="age"
+                      className="text-[13px] tracking-[0.15em] text-white/50 block mb-3"
+                    >
+                      AGE
+                    </label>
+                    <input
+                      id="age"
+                      name="age"
+                      type="text"
+                      value={formData.age}
                       onChange={handleChange}
-                      className={errors.subject ? "border-red-500" : ""}
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[hsl(45,93%,58%)] focus:outline-none transition-colors placeholder:text-white/15"
+                      placeholder="Your age"
                     />
-                    {errors.subject && <p className="text-sm text-red-500">{errors.subject}</p>}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="experience"
+                      className="text-[13px] tracking-[0.15em] text-white/50 block mb-3"
+                    >
+                      EXPERIENCE LEVEL
+                    </label>
+                    <select
+                      id="experience"
+                      name="experience"
+                      value={formData.experience}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[hsl(45,93%,58%)] focus:outline-none transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="none" className="bg-[hsl(0,0%,8%)]">
+                        No experience
+                      </option>
+                      <option value="beginner" className="bg-[hsl(0,0%,8%)]">
+                        Beginner (less than 1 year)
+                      </option>
+                      <option value="intermediate" className="bg-[hsl(0,0%,8%)]">
+                        Intermediate (1-3 years)
+                      </option>
+                      <option value="advanced" className="bg-[hsl(0,0%,8%)]">
+                        Advanced (3+ years)
+                      </option>
+                      <option value="competitive" className="bg-[hsl(0,0%,8%)]">
+                        Competitive athlete
+                      </option>
+                    </select>
                   </div>
                 </div>
 
-                <div className="space-y-2 mb-6">
-                  <Label>I'm interested in:</Label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id="general"
-                        name="interest"
-                        value="general"
-                        checked={formData.interest === "general"}
-                        onChange={() => handleRadioChange("general")}
-                        className="h-4 w-4 text-primary"
-                      />
-                      <Label htmlFor="general" className="font-normal">
-                        General Information
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id="joining"
-                        name="interest"
-                        value="joining"
-                        checked={formData.interest === "joining"}
-                        onChange={() => handleRadioChange("joining")}
-                        className="h-4 w-4 text-primary"
-                      />
-                      <Label htmlFor="joining" className="font-normal">
-                        Joining the Team
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id="training"
-                        name="interest"
-                        value="training"
-                        checked={formData.interest === "training"}
-                        onChange={() => handleRadioChange("training")}
-                        className="h-4 w-4 text-primary"
-                      />
-                      <Label htmlFor="training" className="font-normal">
-                        Training Programs
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id="other"
-                        name="interest"
-                        value="other"
-                        checked={formData.interest === "other"}
-                        onChange={() => handleRadioChange("other")}
-                        className="h-4 w-4 text-primary"
-                      />
-                      <Label htmlFor="other" className="font-normal">
-                        Other
-                      </Label>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-2 mb-6">
-                  <Label htmlFor="experience">
-                    Your Experience Level <span className="text-red-500">*</span>
-                  </Label>
-                  <select
-                    id="experience"
-                    className={`w-full rounded-md border ${
-                      errors.experience ? "border-red-500" : "border-input"
-                    } bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
-                    value={formData.experience}
-                    onChange={(e) => handleSelectChange(e.target.value)}
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="text-[13px] tracking-[0.15em] text-white/50 block mb-3"
                   >
-                    <option value="" disabled>
-                      Select your experience level
-                    </option>
-                    <option value="beginner">Beginner - No experience</option>
-                    <option value="intermediate">Intermediate - Some experience</option>
-                    <option value="advanced">Advanced - Experienced cheerleader</option>
-                    <option value="professional">Professional - Competitive experience</option>
-                  </select>
-                  {errors.experience && <p className="text-sm text-red-500">{errors.experience}</p>}
-                </div>
-
-                <div className="space-y-2 mb-6">
-                  <Label htmlFor="message">
-                    Message <span className="text-red-500">*</span>
-                  </Label>
-                  <Textarea
+                    MESSAGE *
+                  </label>
+                  <textarea
                     id="message"
                     name="message"
+                    required
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className={errors.message ? "border-red-500" : ""}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white text-lg focus:border-[hsl(45,93%,58%)] focus:outline-none transition-colors resize-none placeholder:text-white/15"
+                    placeholder="Tell us about yourself or what you're looking for..."
                   />
-                  {errors.message && <p className="text-sm text-red-500">{errors.message}</p>}
                 </div>
-                <Button type="submit" className="w-full mt-6" size="lg">
-                  Send Message via WhatsApp
-                </Button>
+
+                <button
+                  type="submit"
+                  className="w-full md:w-auto px-16 py-4 bg-[hsl(45,93%,58%)] text-black text-[13px] font-semibold tracking-[0.15em] hover:bg-[hsl(45,93%,68%)] transition-all duration-300 mt-4"
+                >
+                  SEND VIA WHATSAPP
+                </button>
+
+                <p className="text-white/20 text-xs mt-4">
+                  This form opens WhatsApp with your message pre-filled.
+                  We typically respond within 24 hours.
+                </p>
               </form>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   )
 }
