@@ -7,7 +7,7 @@ import Footer from "@/components/footer"
 import { useReveal } from "@/hooks/use-reveal"
 
 const stats = [
-  { number: "2007", label: "Established" },
+  { number: "2008", label: "Established" },
   { number: "17+", label: "Years Competing" },
   { number: "16×", label: "National Champion" },
   { number: "3.9K", label: "Followers" },
@@ -82,7 +82,7 @@ export default function Home() {
         {/* Vertical Side Text */}
         <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 hidden lg:block">
           <p className="text-[11px] tracking-[0.3em] text-white/20 [writing-mode:vertical-lr] rotate-180">
-            CROWN ALLSTAR CHEERLEADING — EST. 2007 BANDUNG
+            CROWN ALLSTAR CHEERLEADING — EST. 2008 BANDUNG
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export default function Home() {
 
           <div className="mb-6">
             <span className="inline-block text-[13px] tracking-[0.3em] text-[hsl(45,93%,58%)] font-medium border border-[hsl(45,93%,58%)]/20 px-5 py-2">
-              16× NATIONAL CHAMPION • EST. 2007
+              16× NATIONAL CHAMPION • EST. 2008
             </span>
           </div>
 

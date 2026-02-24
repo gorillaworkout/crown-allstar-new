@@ -6,7 +6,7 @@ import { useReveal } from "@/hooks/use-reveal"
 
 const timeline = [
   {
-    year: "2007",
+    year: "2008",
     title: "The Beginning",
     desc: "Crown Allstar was founded on September 23 in Bandung, Jawa Barat — as the prototype team of the Indonesian Cheer Association (ICA). A small group of passionate cheerleaders with one dream: build something that lasts.",
   },

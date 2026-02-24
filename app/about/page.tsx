@@ -43,7 +43,7 @@ export default function AboutPage() {
               A <span className="text-[hsl(45,93%,58%)]">TEAM</span>
             </h1>
             <p className="text-white/50 text-lg md:text-xl leading-relaxed max-w-lg">
-              Crown Allstar is ICA&apos;s prototype team — born in Bandung on September 23, 2007.
+              Crown Allstar is ICA&apos;s prototype team — born in Bandung on September 23, 2008.
               What started as a small group of passionate athletes has become one of Indonesia&apos;s
               most decorated cheerleading programs, with 16 consecutive national titles and 
               international medals on three continents.
@@ -133,7 +133,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 reveal reveal-delay-1">
             {[
-              { label: "Founded", value: "September 23, 2007 — Bandung" },
+              { label: "Founded", value: "September 23, 2008 — Bandung" },
               { label: "Status", value: "ICA Prototype Team — Jawa Barat" },
               { label: "National Titles", value: "16× ICANC Champion (2009–2025)" },
               { label: "National Team", value: "Selected in 2012 & 2014 (USA)" },

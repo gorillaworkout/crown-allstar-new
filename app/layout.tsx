@@ -124,8 +124,8 @@ const jsonLd = {
       logo: `${siteUrl}/logo-crown.png`,
       image: `${siteUrl}/og-image.jpg`,
       description:
-        "Crown Allstar is Indonesia's premier cheerleading team based in Bandung, Jawa Barat. Founded in 2007, the team is 16-time consecutive ICANC National Champion (2009-2025), ICU APCC 2024 Gold Medalist, ICU Asian Cheerleading Championship 2023 Bronze Medalist, and has represented Indonesia at the ICU World Cheerleading Championship in Florida, USA.",
-      foundingDate: "2007-09-23",
+        "Crown Allstar is Indonesia's premier cheerleading team based in Bandung, Jawa Barat. Founded in 2008, the team is 16-time consecutive ICANC National Champion (2009-2025), ICU APCC 2024 Gold Medalist, ICU Asian Cheerleading Championship 2023 Bronze Medalist, and has represented Indonesia at the ICU World Cheerleading Championship in Florida, USA.",
+      foundingDate: "2008-09-23",
       foundingLocation: {
         "@type": "Place",
         name: "Bandung",
@@ -217,7 +217,7 @@ const jsonLd = {
           name: "Apa itu Crown Allstar?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Crown Allstar adalah tim cheerleading allstar dari Bandung, Jawa Barat yang didirikan pada 23 September 2007. Tim ini merupakan prototype team dari ICA (Indonesian Cheerleading Association) dan telah menjadi 16 kali juara nasional ICANC berturut-turut dari 2009 hingga 2025.",
+            text: "Crown Allstar adalah tim cheerleading allstar dari Bandung, Jawa Barat yang didirikan pada 23 September 2008. Tim ini merupakan prototype team dari ICA (Indonesian Cheerleading Association) dan telah menjadi 16 kali juara nasional ICANC berturut-turut dari 2009 hingga 2025.",
           },
         },
         {

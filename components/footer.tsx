@@ -27,7 +27,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-white/40 text-sm leading-relaxed max-w-sm">
-              Est. September 23, 2007 — Bandung, Jawa Barat. 16× ICANC National Champion.
+              Est. September 23, 2008 — Bandung, Jawa Barat. 16× ICANC National Champion.
               ICA member. Representing Indonesia on the world stage. #CA4L
             </p>
             <div className="flex gap-5 mt-8">
