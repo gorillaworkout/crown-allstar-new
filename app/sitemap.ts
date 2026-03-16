@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-const siteUrl = "https://crown-allstar-new.vercel.app"
+const siteUrl = "https://crownallstar.com"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

@@ -133,16 +133,16 @@ ${formData.message}`
                   </h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-white/40">Monday</span>
-                      <span className="text-white/70">18:00 — 21:00</span>
-                    </div>
-                    <div className="flex justify-between">
                       <span className="text-white/40">Wednesday</span>
                       <span className="text-white/70">18:00 — 21:00</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/40">Saturday</span>
-                      <span className="text-white/70">10:00 — 14:00</span>
+                      <span className="text-white/70">18:00 — 21:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/40">Sunday</span>
+                      <span className="text-white/70">18:00 — 21:00</span>
                     </div>
                     <div className="border-t border-white/5 pt-3 mt-3">
                       <p className="text-white/30 text-xs">

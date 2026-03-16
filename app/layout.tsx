@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 
-const siteUrl = "https://crown-allstar-new.vercel.app"
+const siteUrl = "https://crownallstar.com"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -108,6 +108,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   category: "sports",
+  verification: {
+    google: "HsDT7KHvHna6DPL8VIica99iE_P0zVTufQjcoW9he7M",
+  },
 }
 
 // JSON-LD Structured Data
