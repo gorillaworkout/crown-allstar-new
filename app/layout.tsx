@@ -280,10 +280,6 @@ export default function RootLayout({
         <meta name="geo.placename" content="Bandung" />
         <meta name="geo.position" content="-6.9175;107.6191" />
         <meta name="ICBM" content="-6.9175, 107.6191" />
-      </head>
-      <body className="min-h-screen flex flex-col">
-        {children}
-      </body>
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-6DWD5JTFEL"></script>
       <script dangerouslySetInnerHTML={{
         __html: `
@@ -293,6 +289,11 @@ export default function RootLayout({
           gtag('config', 'G-6DWD5JTFEL');
         `,
       }} />
+      </head>
+      <body className="min-h-screen flex flex-col">
+        {children}
+      </body>
+
     </html>
   )
 }
