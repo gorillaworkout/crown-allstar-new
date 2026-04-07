@@ -77,7 +77,7 @@ ${formData.message}`
                     href="https://wa.me/6281324420183"
                     className="text-white text-lg hover:text-[hsl(45,93%,58%)] transition-colors"
                   >
-                    +62 813-2442-0183
+                    +62 851-3352-4900
                   </a>
                 </div>
 
@@ -86,10 +86,10 @@ ${formData.message}`
                     EMAIL
                   </h3>
                   <a
-                    href="mailto:crownallstar@gmail.com"
+                    href="mailto:contact.crownallstar@gmail.com"
                     className="text-white text-lg hover:text-[hsl(45,93%,58%)] transition-colors"
                   >
-                    crownallstar@gmail.com
+                    contact.crownallstar@gmail.com
                   </a>
                 </div>
 

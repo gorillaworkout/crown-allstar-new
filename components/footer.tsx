@@ -89,10 +89,10 @@ export default function Footer() {
             <div className="flex flex-col gap-3 text-sm text-white/40">
               <p>Jakarta, Indonesia</p>
               <a href="https://wa.me/6281324420183" className="hover:text-white transition-colors">
-                +62 813-2442-0183
+                +62 851-3352-4900
               </a>
-              <a href="mailto:crownallstar@gmail.com" className="hover:text-white transition-colors">
-                crownallstar@gmail.com
+              <a href="mailto:contact.crownallstar@gmail.com" className="hover:text-white transition-colors">
+                contact.crownallstar@gmail.com
               </a>
             </div>
           </div>
