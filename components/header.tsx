@@ -125,7 +125,7 @@ export default function Header() {
                     href={item.path}
                     className={`block px-6 py-3 text-[12px] tracking-[0.15em] transition-all duration-300 ${
                       item.name === "MAKRAB 2026"
-                        ? "text-white/60 hover:text-[hsl(0,80%,50%)] hover:bg-white/5"
+                        ? "text-white/60 hover:text-[#9370DB] hover:bg-white/5"
                         : "text-white/60 hover:text-white hover:bg-white/5"
                     } ${isActive(item.path) ? "text-[hsl(45,93%,58%)]" : ""}`}
                   >
@@ -197,7 +197,7 @@ export default function Header() {
                     href={item.path}
                     className={`font-display text-xl tracking-wider ${
                       item.name === "MAKRAB 2026"
-                        ? isActive(item.path) ? "text-[hsl(0,80%,50%)]" : "text-white/40"
+                        ? isActive(item.path) ? "text-[#9370DB]" : "text-white/40"
                         : isActive(item.path) ? "text-[hsl(45,93%,58%)]" : "text-white/40"
                     }`}
                   >

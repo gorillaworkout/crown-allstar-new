@@ -170,6 +170,37 @@
   filter: drop-shadow(0 0 20px rgba(139, 0, 0, 0.5));
 }
 
+/* ── Disney Glow Text ── */
+.disney-glow {
+  background: linear-gradient(180deg, #ffffff 0%, #9370DB 50%, #5B2C8B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(147, 112, 219, 0.4));
+}
+
+/* ── Gold Glow ── */
+.gold-glow {
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+}
+
+/* ── Magic Float ── */
+@keyframes magic-float {
+  0%, 100% { transform: translateX(0) rotate(25deg); opacity: 0.3; }
+  50% { transform: translateX(40px) rotate(25deg); opacity: 0.6; }
+}
+.magic-float {
+  animation: magic-float 6s ease-in-out infinite;
+}
+.magic-float-delay {
+  animation: magic-float 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+.magic-float-delay-2 {
+  animation: magic-float 10s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
 /* ── Spotlight Beams ── */
 @keyframes spotlight-sway {
   0%, 100% { transform: translateX(0) skewX(-2deg); }
