@@ -147,72 +147,11 @@ function HeroSection() {
       {/* Noise */}
       <div className="absolute inset-0 noise opacity-20" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        {/* Presents badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-8"
-        >
-          <div className="inline-flex items-center gap-3 border border-white/10 px-6 py-2.5 bg-white/5 backdrop-blur-sm">
-            <Sparkles className="w-4 h-4 text-[#FFD700]" />
-            <span className="text-white/60 text-xs tracking-[0.3em] uppercase">Crown Allstar Presents</span>
-            <Sparkles className="w-4 h-4 text-[#FFD700]" />
-          </div>
-        </motion.div>
-
-        {/* Title */}
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-          <h1 className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.85] tracking-wider text-white mb-2">
-            <span className="disney-glow">MAKRAB</span>
-          </h1>
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#9370DB]" />
-            <span className="font-display text-[clamp(3rem,10vw,8rem)] leading-none tracking-wider text-[#FFD700] gold-glow">
-              2026
-            </span>
-            <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#9370DB]" />
-          </div>
-        </motion.div>
-
-        {/* Theme badge */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="mb-6">
-          <div className="inline-flex items-center gap-3 border border-[#9370DB]/30 px-8 py-3 bg-[#9370DB]/5">
-            <Star className="w-4 h-4 text-[#FFD700] fill-[#FFD700]" />
-            <span className="font-display text-2xl md:text-3xl tracking-[0.15em] text-[#FFD700]">DISNEY</span>
-            <Star className="w-4 h-4 text-[#FFD700] fill-[#FFD700]" />
-          </div>
-        </motion.div>
-
-        {/* Dates */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.8 }} className="mb-8">
-          <div className="inline-flex items-center gap-4 border border-white/10 px-8 py-3 bg-black/30 backdrop-blur-sm">
-            <div className="text-center">
-              <p className="text-white/40 text-[10px] tracking-[0.2em] uppercase">When</p>
-              <p className="font-display text-lg tracking-wider text-white">7 — 9 AUGUST 2026</p>
-            </div>
-            <div className="w-[1px] h-8 bg-white/10" />
-            <div className="text-center">
-              <p className="text-white/40 text-[10px] tracking-[0.2em] uppercase">Where</p>
-              <p className="font-display text-lg tracking-wider text-white">LEMBANG, BANDUNG</p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="text-white/50 text-lg tracking-wide max-w-2xl mx-auto mb-12 font-light italic"
-        >
-          &ldquo;Where dreams come true.&rdquo; — Three magical days in the mountains of Lembang.
-        </motion.p>
-
+      <motion.div className="relative z-10">
         {/* Scroll indicator */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="absolute bottom-10 left-1/2 -translate-x-1/2">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2">
           <div className="scroll-indicator">
-            <ChevronDown className="w-6 h-6 text-[#9370DB]/40" />
+            <ChevronDown className="w-6 h-6 text-white/40" />
           </div>
         </motion.div>
       </motion.div>
