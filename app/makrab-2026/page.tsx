@@ -120,28 +120,29 @@ function HeroSection() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const castleY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"])
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Deep magical gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0020] via-[#150030] to-[#0a0020]" />
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster="/og-makrab-2026.png"
+      >
+        <source src="/makrab-2026-hero.mp4" type="video/mp4" />
+      </video>
 
-      {/* Radial glow center */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#9370DB]/[0.06] rounded-full blur-[120px]" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-[#FFD700]/[0.04] rounded-full blur-[100px]" />
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0020]/70 via-transparent to-[#0a0020]/90" />
 
-      {/* Castle silhouette */}
-      <motion.div style={{ y: castleY }} className="absolute bottom-0 left-0 right-0">
-        <CastleSilhouette className="w-full h-auto text-[#9370DB]" />
-      </motion.div>
-
-      {/* Sparkles */}
+      {/* Sparkles on top of video */}
       <SparkleField count={50} color="white" />
       <SparkleField count={20} color="#FFD700" />
       <SparkleField count={15} color="#9370DB" />
-
-      <MagicTrail />
 
       {/* Noise */}
       <div className="absolute inset-0 noise opacity-20" />
