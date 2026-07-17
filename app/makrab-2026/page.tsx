@@ -578,6 +578,26 @@ export default function Makrab2026Page() {
   return (
     <>
       <Header />
+
+      {/* Sticky Registration Banner */}
+      <a
+        href="https://forms.gle/8qethafK29jM26Vp7"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-3 py-2.5 px-6 bg-gradient-to-r from-[#9370DB] via-[#7B5FCC] to-[#9370DB] text-white text-sm tracking-wider font-display hover:from-[#a485e0] hover:via-[#8B6FD4] hover:to-[#a485e0] transition-all duration-300 shadow-[0_2px_20px_rgba(147,112,219,0.3)]"
+      >
+        <Sparkles className="w-4 h-4 text-[#FFD700]" />
+        <span className="text-[#FFD700] font-bold">REGISTER NOW</span>
+        <span className="text-white/70 hidden sm:inline">—</span>
+        <span className="text-white/80 hidden sm:inline">Makrab Crown Allstar 2026</span>
+        <span className="text-white/70 hidden sm:inline">—</span>
+        <span className="text-white/80 hidden md:inline">7 — 9 August • Lembang, Bandung</span>
+        <ChevronDown className="w-3 h-3 text-[#FFD700] animate-bounce" />
+      </a>
+
+      {/* Offset for fixed banner */}
+      <div className="h-[42px]" />
+
       <main>
         <HeroSection />
         <DetailsSection />
