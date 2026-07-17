@@ -123,31 +123,6 @@ function HeroSection() {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Sticky Registration Banner */}
-      <a
-        href="https://forms.gle/8qethafK29jM26Vp7"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-[#0a0020] via-[#150030] to-[#0a0020] border-b border-[#9370DB]/30 backdrop-blur-md"
-        style={{ boxShadow: '0 4px 30px rgba(147, 112, 219, 0.15)' }}
-      >
-        <div className="hidden sm:flex items-center gap-2 bg-[#9370DB]/10 border border-[#9370DB]/30 px-4 py-1.5">
-          <Sparkles className="w-4 h-4 text-[#FFD700]" />
-          <span className="text-white/70 text-xs tracking-[0.2em] uppercase">Daftar Sekarang</span>
-          <Sparkles className="w-4 h-4 text-[#FFD700]" />
-        </div>
-        <div className="flex items-center gap-2 bg-gradient-to-r from-[#FFD700] to-[#F5C000] px-6 py-2.5 text-[#0a0020] font-semibold text-sm shadow-lg shadow-[#FFD700]/30 hover:shadow-xl hover:shadow-[#FFD700]/50 transition-all duration-300">
-          <Star className="w-4 h-4 fill-current" />
-          <span className="tracking-wide">REGISTER MAKRAB 2026</span>
-          <Star className="w-4 h-4 fill-current" />
-        </div>
-        <div className="hidden sm:flex items-center gap-2 bg-[#9370DB]/10 border border-[#9370DB]/30 px-4 py-1.5">
-          <Sparkles className="w-4 h-4 text-[#FFD700]" />
-          <span className="text-white/70 text-xs tracking-[0.2em] uppercase">7-9 Agustus • Lembang</span>
-          <Sparkles className="w-4 h-4 text-[#FFD700]" />
-        </div>
-      </a>
-
       {/* Video Background */}
       <video
         autoPlay
@@ -604,8 +579,32 @@ export default function Makrab2026Page() {
     <>
       <Header />
 
-      {/* Offset for fixed banner */}
-      <div className="h-[56px] sm:h-[52px]" />
+      {/* Sticky Registration Banner — sits below Header */}
+      <div className="sticky top-20 z-40">
+        <a
+          href="https://forms.gle/8qethafK29jM26Vp7"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-[#0a0020] via-[#150030] to-[#0a0020] border-b border-[#9370DB]/30 backdrop-blur-md"
+          style={{ boxShadow: '0 4px 30px rgba(147, 112, 219, 0.15)' }}
+        >
+          <div className="hidden sm:flex items-center gap-2 bg-[#9370DB]/10 border border-[#9370DB]/30 px-4 py-1.5">
+            <Sparkles className="w-4 h-4 text-[#FFD700]" />
+            <span className="text-white/70 text-xs tracking-[0.2em] uppercase">Daftar Sekarang</span>
+            <Sparkles className="w-4 h-4 text-[#FFD700]" />
+          </div>
+          <div className="flex items-center gap-2 bg-gradient-to-r from-[#FFD700] to-[#F5C000] px-6 py-2.5 text-[#0a0020] font-semibold text-sm shadow-lg shadow-[#FFD700]/30 hover:shadow-xl hover:shadow-[#FFD700]/50 transition-all duration-300">
+            <Star className="w-4 h-4 fill-current" />
+            <span className="tracking-wide">REGISTER MAKRAB 2026</span>
+            <Star className="w-4 h-4 fill-current" />
+          </div>
+          <div className="hidden sm:flex items-center gap-2 bg-[#9370DB]/10 border border-[#9370DB]/30 px-4 py-1.5">
+            <Sparkles className="w-4 h-4 text-[#FFD700]" />
+            <span className="text-white/70 text-xs tracking-[0.2em] uppercase">7-9 Agustus • Lembang</span>
+            <Sparkles className="w-4 h-4 text-[#FFD700]" />
+          </div>
+        </a>
+      </div>
 
       <main>
         <HeroSection />
