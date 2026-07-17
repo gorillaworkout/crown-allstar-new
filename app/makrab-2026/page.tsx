@@ -19,6 +19,9 @@ import {
   Tent,
   Gamepad2,
   Mountain,
+  Eye,
+  Flame,
+  Wand2,
 } from "lucide-react"
 
 /* ══════════════════════════════════════════════
@@ -416,6 +419,131 @@ function MarqueeBanner() {
 }
 
 /* ══════════════════════════════════════════════
+   FLOATING ORBS (between sections)
+   ══════════════════════════════════════════════ */
+function FloatingOrbs() {
+  return (
+    <div className="relative h-40 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0020] to-[#0d0025]" />
+      {[
+        { size: 120, x: "15%", y: "20%", color: "#9370DB", delay: 0, dur: 6 },
+        { size: 80, x: "70%", y: "50%", color: "#FFD700", delay: 2, dur: 8 },
+        { size: 60, x: "40%", y: "70%", color: "#9370DB", delay: 1, dur: 7 },
+        { size: 40, x: "85%", y: "30%", color: "#FFD700", delay: 3, dur: 5 },
+      ].map((orb, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full orb-float"
+          style={{
+            width: `${orb.size}px`,
+            height: `${orb.size}px`,
+            left: orb.x,
+            top: orb.y,
+            backgroundColor: orb.color,
+            filter: `blur(${orb.size / 2}px)`,
+            opacity: 0.08,
+            animationDelay: `${orb.delay}s`,
+            animationDuration: `${orb.dur}s`,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/* ══════════════════════════════════════════════
+   SECRET EVENT SECTION
+   ══════════════════════════════════════════════ */
+function SecretEventSection() {
+  return (
+    <section className="relative py-32 px-6 overflow-hidden">
+      {/* Dark mystical bg */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0025] via-[#1a0035] to-[#0d0025]" />
+      
+      {/* Pulsing mystery glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FFD700]/[0.03] rounded-full blur-[120px] mystery-pulse" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#9370DB]/[0.05] rounded-full blur-[80px] mystery-pulse-delay" />
+      
+      {/* Orbiting stars */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] orbit-container">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Star className="w-3 h-3 text-[#FFD700] fill-[#FFD700]" />
+        </div>
+      </div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] orbit-container-reverse">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Star className="w-2 h-2 text-[#9370DB] fill-[#9370DB]" />
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, type: "spring" }}
+          className="mb-8"
+        >
+          <div className="inline-flex items-center gap-3 border border-[#FFD700]/30 px-8 py-3 bg-[#FFD700]/5 mystery-border">
+            <Eye className="w-5 h-5 text-[#FFD700] eye-glow" />
+            <span className="text-[#FFD700] text-sm tracking-[0.3em] uppercase font-display">Top Secret</span>
+            <Eye className="w-5 h-5 text-[#FFD700] eye-glow" />
+          </div>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="font-display text-5xl md:text-7xl tracking-wider text-white mb-6"
+        >
+          <span className="mystery-text">A SECRET</span>
+          <br />
+          <span className="text-[#FFD700]">AWAITS</span>
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="flex items-center justify-center gap-4 mb-8"
+        >
+          <Wand2 className="w-5 h-5 text-[#9370DB] wand-spin" />
+          <span className="text-white/30 text-sm tracking-[0.2em]">AUGUST 8 • NIGHTFALL</span>
+          <Wand2 className="w-5 h-5 text-[#9370DB] wand-spin-reverse" />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="text-white/40 text-lg max-w-xl mx-auto mb-8 italic"
+        >
+          On the second night, something extraordinary will unfold under the stars.
+          <br />Only those present will witness it.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+        >
+          <div className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 bg-white/[0.02]">
+            <Flame className="w-4 h-4 text-[#FFD700] flame-flicker" />
+            <span className="text-white/50 text-xs tracking-[0.2em] uppercase">Shh… It&apos;s a surprise</span>
+            <Flame className="w-4 h-4 text-[#FFD700] flame-flicker" />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ══════════════════════════════════════════════
    CTA
    ══════════════════════════════════════════════ */
 function ComingSoonSection() {
@@ -446,9 +574,43 @@ function ComingSoonSection() {
           <br />AWAITS
         </motion.h2>
 
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }} className="text-white/40 text-lg max-w-2xl mx-auto mb-12">
-          Prepare for three unforgettable days of Disney magic in Lembang. Registration details coming soon — stay tuned!
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }} className="text-white/40 text-lg max-w-2xl mx-auto mb-6">
+          Prepare for three unforgettable days of Disney magic in Lembang.
         </motion.p>
+
+        {/* Registration link */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mb-8"
+        >
+          <a
+            href="https://forms.gle/8qethafK29jM26Vp7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#9370DB]/20 border border-[#9370DB]/30 text-[#FFD700] font-display text-lg tracking-wider transition-all duration-300 hover:bg-[#9370DB]/30 hover:text-white rounded-lg"
+          >
+            REGISTER NOW →
+          </a>
+        </motion.div>
+
+        {/* Secret event badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mb-10"
+        >
+          <div className="inline-flex items-center gap-2 border border-[#FFD700]/20 px-6 py-2 bg-[#FFD700]/5">
+            <Star className="w-3 h-3 text-[#FFD700]" />
+            <span className="text-xs text-[#FFD700] tracking-[0.2em] uppercase">SECRET EVENT</span>
+            <Star className="w-3 h-3 text-[#FFD700]" />
+          </div>
+          <p className="text-white/40 text-sm mt-2">August 8 • Evening • Surprise awaits...</p>
+        </motion.div>
 
         {/* Decorative sparkle line */}
         <motion.div
@@ -482,6 +644,8 @@ export default function Makrab2026Page() {
         <MarqueeBanner />
         <ThemeSection />
         <ItinerarySection />
+        <FloatingOrbs />
+        <SecretEventSection />
         <ComingSoonSection />
       </main>
       <Footer />
