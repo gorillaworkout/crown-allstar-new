@@ -155,3 +155,54 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
+
+/* ── Hollywood Glow Text ── */
+.hollywood-glow {
+  background: linear-gradient(180deg, #ffffff 0%, #ff4444 40%, #8B0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.3));
+}
+
+/* ── Red Carpet Glow ── */
+.red-carpet-glow {
+  filter: drop-shadow(0 0 20px rgba(139, 0, 0, 0.5));
+}
+
+/* ── Spotlight Beams ── */
+@keyframes spotlight-sway {
+  0%, 100% { transform: translateX(0) skewX(-2deg); }
+  50% { transform: translateX(30px) skewX(2deg); }
+}
+.spotlight-beam {
+  animation: spotlight-sway 8s ease-in-out infinite;
+}
+.spotlight-beam-delay {
+  animation: spotlight-sway 10s ease-in-out infinite;
+  animation-delay: 2s;
+}
+.spotlight-beam-delay-2 {
+  animation: spotlight-sway 12s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* ── Star Twinkle ── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.5); }
+}
+.star-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* ── Film Strip Border ── */
+.film-strip {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 8px,
+    rgba(255,255,255,0.05) 8px,
+    rgba(255,255,255,0.05) 16px
+  );
+}

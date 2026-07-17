@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { ChevronDown } from "lucide-react"
 
 const navItems = [
   { name: "HOME", path: "/" },
@@ -12,10 +13,17 @@ const navItems = [
   { name: "CONTACT", path: "/contact" },
 ]
 
+const activityDropdown = [
+  { name: "MAKRAB 2026", path: "/makrab-2026" },
+  { name: "SUPPORT", path: "/contact" },
+]
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [activityOpen, setActivityOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const activityRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -25,7 +33,22 @@ export default function Header() {
 
   useEffect(() => {
     setIsOpen(false)
+    setActivityOpen(false)
   }, [pathname])
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (activityRef.current && !activityRef.current.contains(e.target as Node)) {
+        setActivityOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [])
+
+  const isActive = (path: string) => pathname === path
+  const isActivityActive = pathname === "/makrab-2026" || pathname === "/support"
 
   return (
     <header
@@ -63,7 +86,7 @@ export default function Header() {
                 key={item.path}
                 href={item.path}
                 className={`text-[13px] font-medium tracking-[0.15em] transition-colors duration-300 ${
-                  pathname === item.path
+                  isActive(item.path)
                     ? "text-[hsl(45,93%,58%)]"
                     : "text-white/60 hover:text-white"
                 }`}
@@ -71,6 +94,47 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+
+            {/* Activity Dropdown */}
+            <div ref={activityRef} className="relative">
+              <button
+                onClick={() => setActivityOpen(!activityOpen)}
+                onMouseEnter={() => setActivityOpen(true)}
+                className={`flex items-center gap-1.5 text-[13px] font-medium tracking-[0.15em] transition-colors duration-300 ${
+                  isActivityActive
+                    ? "text-[hsl(45,93%,58%)]"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                ACTIVITY
+                <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${activityOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Dropdown */}
+              <div
+                className={`absolute top-full right-0 mt-2 min-w-[200px] bg-black/95 backdrop-blur-md border border-white/10 transition-all duration-300 ${
+                  activityOpen
+                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                    : "opacity-0 -translate-y-2 pointer-events-none"
+                }`}
+                onMouseLeave={() => setActivityOpen(false)}
+              >
+                {activityDropdown.map((item) => (
+                  <Link
+                    key={item.path + item.name}
+                    href={item.path}
+                    className={`block px-6 py-3 text-[12px] tracking-[0.15em] transition-all duration-300 ${
+                      item.name === "MAKRAB 2026"
+                        ? "text-white/60 hover:text-[hsl(0,80%,50%)] hover:bg-white/5"
+                        : "text-white/60 hover:text-white hover:bg-white/5"
+                    } ${isActive(item.path) ? "text-[hsl(45,93%,58%)]" : ""}`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <Link
               href="/contact"
               className="text-[13px] font-semibold tracking-[0.15em] px-6 py-2.5 border border-[hsl(45,93%,58%)] text-[hsl(45,93%,58%)] hover:bg-[hsl(45,93%,58%)] hover:text-black transition-all duration-300"
@@ -102,7 +166,7 @@ export default function Header() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-black/95 backdrop-blur-md border-t border-white/5 px-6 py-8">
@@ -112,7 +176,7 @@ export default function Header() {
                 key={item.path}
                 href={item.path}
                 className={`font-display text-2xl tracking-wider ${
-                  pathname === item.path
+                  isActive(item.path)
                     ? "text-[hsl(45,93%,58%)]"
                     : "text-white/60"
                 }`}
@@ -120,6 +184,29 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+
+            {/* Mobile Activity */}
+            <div>
+              <span className="font-display text-2xl tracking-wider text-white/60 block mb-3">
+                ACTIVITY
+              </span>
+              <div className="flex flex-col gap-4 ml-4">
+                {activityDropdown.map((item) => (
+                  <Link
+                    key={item.path + item.name}
+                    href={item.path}
+                    className={`font-display text-xl tracking-wider ${
+                      item.name === "MAKRAB 2026"
+                        ? isActive(item.path) ? "text-[hsl(0,80%,50%)]" : "text-white/40"
+                        : isActive(item.path) ? "text-[hsl(45,93%,58%)]" : "text-white/40"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <Link
               href="/contact"
               className="font-display text-2xl tracking-wider text-[hsl(45,93%,58%)] border border-[hsl(45,93%,58%)] px-6 py-3 text-center mt-2"
