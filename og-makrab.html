@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1200px;
+  height: 630px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: #0a0020;
+}
+
+.container {
+  width: 1200px;
+  height: 630px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background */
+.bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0a0020 0%, #1a0040 30%, #150030 60%, #0a0020 100%);
+}
+
+/* Radial glow */
+.glow1 {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(147,112,219,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.glow2 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Castle silhouette */
+.castle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.12;
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.presents {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  background: linear-gradient(180deg, #ffffff 0%, #9370DB 50%, #5B2C8B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px rgba(147, 112, 219, 0.5));
+  margin-bottom: 0;
+}
+
+.year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  letter-spacing: 0.1em;
+  color: #FFD700;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+  line-height: 1;
+}
+
+.theme-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(147, 112, 219, 0.3);
+  padding: 8px 30px;
+  background: rgba(147, 112, 219, 0.08);
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.theme-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.2em;
+  color: #FFD700;
+}
+
+.theme-star {
+  color: #FFD700;
+  font-size: 16px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 30px;
+  background: rgba(0,0,0,0.3);
+}
+
+.info-item {
+  text-align: center;
+}
+
+.info-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: white;
+}
+
+.divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255,255,255,0.1);
+}
+
+.tagline {
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+  margin-top: 16px;
+  letter-spacing: 0.02em;
+}
+
+/* Bottom bar */
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #9370DB, #FFD700, #9370DB, transparent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg"></div>
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+
+  <!-- Castle SVG -->
+  <svg class="castle" viewBox="0 0 1200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="60" width="25" height="140" fill="#9370DB"/>
+    <polygon points="212,20 200,60 225,60" fill="#9370DB"/>
+    <rect x="975" y="60" width="25" height="140" fill="#9370DB"/>
+    <polygon points="987,20 975,60 1000,60" fill="#9370DB"/>
+    <rect x="560" y="30" width="80" height="170" fill="#9370DB"/>
+    <polygon points="600,0 560,30 640,30" fill="#9370DB"/>
+    <circle cx="600" cy="-5" r="8" fill="#FFD700"/>
+    <rect x="225" y="100" width="335" height="100" fill="#9370DB" opacity="0.7"/>
+    <rect x="640" y="100" width="335" height="100" fill="#9370DB" opacity="0.7"/>
+    <rect x="580" y="180" width="40" height="20" fill="#9370DB" opacity="0.5"/>
+    <rect x="0" y="190" width="1200" height="10" fill="#9370DB" opacity="0.3"/>
+  </svg>
+
+  <!-- Stars -->
+  <div class="star" style="width:2px;height:2px;top:8%;left:12%;opacity:0.5"></div>
+  <div class="star" style="width:3px;height:3px;top:15%;left:25%;opacity:0.3"></div>
+  <div class="star" style="width:2px;height:2px;top:5%;left:45%;opacity:0.6"></div>
+  <div class="star" style="width:2px;height:2px;top:12%;left:70%;opacity:0.4"></div>
+  <div class="star" style="width:3px;height:3px;top:8%;left:85%;opacity:0.3"></div>
+  <div class="star" style="width:2px;height:2px;top:20%;left:92%;opacity:0.5"></div>
+  <div class="star" style="width:2px;height:2px;top:18%;left:55%;opacity:0.4"></div>
+  <div class="star" style="width:3px;height:3px;top:25%;left:15%;opacity:0.3"></div>
+  <div class="star" style="width:2px;height:2px;top:10%;left:38%;opacity:0.5"></div>
+  <div class="star" style="width:2px;height:2px;top:6%;left:78%;opacity:0.4"></div>
+  <div class="star" style="width:1px;height:1px;top:30%;left:8%;opacity:0.3"></div>
+  <div class="star" style="width:1px;height:1px;top:22%;left:62%;opacity:0.4"></div>
+  <div class="star" style="width:2px;height:2px;top:3%;left:52%;opacity:0.3"></div>
+  <div class="star" style="width:2px;height:2px;top:14%;left:30%;opacity:0.5"></div>
+  <div class="star" style="width:1px;height:1px;top:28%;left:75%;opacity:0.3"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="presents">✦ Crown Allstar Presents ✦</div>
+    <div class="title">MAKRAB</div>
+    <div class="year">2026</div>
+    <div class="theme-badge">
+      <span class="theme-star">★</span>
+      <span class="theme-text">DISNEY</span>
+      <span class="theme-star">★</span>
+    </div>
+    <div class="info-row">
+      <div class="info-item">
+        <div class="info-label">When</div>
+        <div class="info-value">7 — 9 AUGUST 2026</div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-item">
+        <div class="info-label">Where</div>
+        <div class="info-value">LEMBANG, BANDUNG</div>
+      </div>
+    </div>
+    <div class="tagline">"Where dreams come true."</div>
+  </div>
+
+  <div class="bottom-bar"></div>
+</div>
+</body>
+</html>
