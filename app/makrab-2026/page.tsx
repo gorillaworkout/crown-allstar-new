@@ -585,24 +585,11 @@ export default function Makrab2026Page() {
           href="https://forms.gle/8qethafK29jM26Vp7"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-[#0a0020] via-[#150030] to-[#0a0020] border-b border-[#9370DB]/30 backdrop-blur-md"
-          style={{ boxShadow: '0 4px 30px rgba(147, 112, 219, 0.15)' }}
+          className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#FFD700] via-[#F5C000] to-[#FFD700] text-[#0a0020] font-semibold text-sm tracking-wide shadow-lg shadow-[#FFD700]/40 hover:shadow-xl hover:shadow-[#FFD700]/60 hover:from-[#FFF040] hover:to-[#FFF040] transition-all duration-300 border border-[#FFD700]/50"
         >
-          <div className="hidden sm:flex items-center gap-2 bg-[#9370DB]/10 border border-[#9370DB]/30 px-4 py-1.5">
-            <Sparkles className="w-4 h-4 text-[#FFD700]" />
-            <span className="text-white/70 text-xs tracking-[0.2em] uppercase">Daftar Sekarang</span>
-            <Sparkles className="w-4 h-4 text-[#FFD700]" />
-          </div>
-          <div className="flex items-center gap-2 bg-gradient-to-r from-[#FFD700] to-[#F5C000] px-6 py-2.5 text-[#0a0020] font-semibold text-sm shadow-lg shadow-[#FFD700]/30 hover:shadow-xl hover:shadow-[#FFD700]/50 transition-all duration-300">
-            <Star className="w-4 h-4 fill-current" />
-            <span className="tracking-wide">REGISTER MAKRAB 2026</span>
-            <Star className="w-4 h-4 fill-current" />
-          </div>
-          <div className="hidden sm:flex items-center gap-2 bg-[#9370DB]/10 border border-[#9370DB]/30 px-4 py-1.5">
-            <Sparkles className="w-4 h-4 text-[#FFD700]" />
-            <span className="text-white/70 text-xs tracking-[0.2em] uppercase">7-9 Agustus • Lembang</span>
-            <Sparkles className="w-4 h-4 text-[#FFD700]" />
-          </div>
+          <Star className="w-4 h-4 fill-current mr-2" />
+          <span>REGISTER MAKRAB 2026 • 7-9 AGUSTUS LEMBANG</span>
+          <Star className="w-4 h-4 fill-current ml-2" />
         </a>
       </div>
 
