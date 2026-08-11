@@ -5,7 +5,9 @@ export const BATCH = 18;
 
 // Window is fixed to WIB (UTC+7) so registrants in WITA/WIT aren't cut off early.
 // 13 Aug 2026 00:00 WIB → 21 Aug 2026 23:59:59.999 WIB
-export const OPEN_AT = new Date('2026-08-13T00:00:00+07:00');
+// Opened early at Bayu's request so the live form can be tested before 13 Aug.
+// To restore the announced window, set this back to 2026-08-13T00:00:00+07:00.
+export const OPEN_AT = new Date('2026-08-01T00:00:00+07:00');
 export const CLOSE_AT = new Date('2026-08-21T23:59:59.999+07:00');
 
 export type Division = 'all-girl' | 'c4' | 'premier';
@@ -24,21 +26,21 @@ export const DIVISIONS: {
     name: 'ALL GIRL',
     minAge: 13,
     genders: ['perempuan'],
-    blurb: 'Tim putri. Kekuatan dan presisi tanpa kompromi.',
+    blurb: 'All-female team. Strength and precision, no compromise.',
   },
   {
     id: 'c4',
     name: 'C4',
     minAge: 13,
     genders: ['perempuan', 'laki-laki'],
-    blurb: 'Tim campuran. Pintu masuk paling terbuka untuk pemula.',
+    blurb: 'Co-ed team. The most open entry point for beginners.',
   },
   {
     id: 'premier',
     name: 'PREMIER',
     minAge: 15,
     genders: ['perempuan', 'laki-laki'],
-    blurb: 'Tim campuran tingkat lanjut. Panggung kompetisi nasional.',
+    blurb: 'Advanced co-ed team. The national competition stage.',
   },
 ];
 
@@ -49,18 +51,18 @@ export const POSITIONS = [
   'Frontspot',
   'Tumbler',
   'Dancer',
-  'Belum tahu',
+  'Not sure yet',
 ] as const;
 
 export const EXPERIENCE = [
-  'Belum pernah / pemula',
-  'Kurang dari 1 tahun',
-  '1-2 tahun',
-  '3-5 tahun',
-  'Lebih dari 5 tahun',
+  'None / complete beginner',
+  'Less than 1 year',
+  '1-2 years',
+  '3-5 years',
+  'More than 5 years',
 ] as const;
 
-export const HEARD_FROM = ['Instagram', 'Teman', 'Sekolah / Kampus', 'Event', 'Lainnya'] as const;
+export const HEARD_FROM = ['Instagram', 'A friend', 'School / campus', 'An event', 'Other'] as const;
 
 /** Age in whole years at `on` (defaults to now). Returns -1 for an unparseable date. */
 export function ageAt(birthDate: string, on: Date = new Date()): number {
@@ -80,12 +82,12 @@ export function divisionBlocker(
   age: number
 ): string | null {
   const d = DIVISIONS.find((x) => x.id === division);
-  if (!d) return 'Divisi tidak dikenal.';
+  if (!d) return 'Unknown division.';
   if (gender && !d.genders.includes(gender)) {
-    return `Divisi ${d.name} hanya untuk perempuan.`;
+    return `${d.name} is open to female athletes only.`;
   }
   if (age >= 0 && age < d.minAge) {
-    return `Divisi ${d.name} minimum ${d.minAge} tahun.`;
+    return `${d.name} requires a minimum age of ${d.minAge}.`;
   }
   return null;
 }

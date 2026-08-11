@@ -8,12 +8,12 @@ import RecruitmentForm from '@/components/recruitment/recruitment-form';
 import { DIVISIONS, windowState } from '@/lib/recruitment';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Open Recruitment Angkatan 18 | Crown Allstar Cheerleading' },
+  title: { absolute: 'Open Recruitment Batch 18 | Crown Allstar Cheerleading' },
   description:
-    'Crown Allstar membuka pendaftaran Angkatan 18, 13-21 Agustus 2026. Gratis, tanpa pengalaman diperbolehkan. Divisi All Girl, C4, dan Premier.',
+    'Crown Allstar Batch 18 open recruitment, 13-21 August 2026. Free to join, no experience required. All Girl, C4 and Premier divisions.',
   openGraph: {
-    title: 'Open Recruitment Crown Allstar Angkatan 18',
-    description: '13-21 Agustus 2026. Gratis. Tanpa pengalaman diperbolehkan.',
+    title: 'Open Recruitment Crown Allstar Batch 18',
+    description: '13-21 August 2026. Free. No experience required.',
   },
 };
 
@@ -21,54 +21,54 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 const TIMELINE = [
-  { date: '13 AGU', label: 'Pendaftaran dibuka', done: false },
-  { date: '21 AGU', label: 'Pendaftaran ditutup', done: false },
-  { date: 'TBA', label: 'Audisi & seleksi', done: false },
-  { date: 'TBA', label: 'Pengumuman hasil', done: false },
+  { date: '13 AUG', label: 'Registration opens', done: false },
+  { date: '21 AUG', label: 'Registration closes', done: false },
+  { date: 'TBA', label: 'Auditions & selection', done: false },
+  { date: 'TBA', label: 'Results announced', done: false },
 ];
 
 const REQUIREMENTS = [
   {
     n: '01',
-    title: 'TANPA PENGALAMAN DIPERBOLEHKAN',
-    body: 'Belum pernah cheerleading sama sekali? Tetap boleh mendaftar. Kami melatih dari dasar.',
+    title: 'NO EXPERIENCE REQUIRED',
+    body: 'Never done cheerleading before? You can still apply. We train from the ground up.',
   },
   {
     n: '02',
-    title: 'DISETUJUI ORANG TUA',
-    body: 'Pendaftaran wajib diketahui dan disetujui orang tua atau wali.',
+    title: 'PARENTAL APPROVAL',
+    body: 'Your parent or guardian must know about and approve your registration.',
   },
   {
     n: '03',
-    title: 'SIAP BERKOMITMEN',
-    body: 'Bersedia mengikuti jadwal latihan serta rangkaian program Crown secara konsisten.',
+    title: 'READY TO COMMIT',
+    body: 'Willing to follow the training schedule and Crown programme consistently.',
   },
 ];
 
 const FAQ = [
   {
-    q: 'Boleh daftar kalau belum pernah cheerleading?',
-    a: 'Boleh. Tanpa pengalaman diperbolehkan — ini salah satu syarat resmi Angkatan 18. Banyak atlet Crown mulai dari nol.',
+    q: 'Can I apply if I have never done cheerleading?',
+    a: 'Yes. No experience is required — that is one of the official Batch 18 terms. Many Crown athletes started from zero.',
   },
   {
-    q: 'Berapa biaya pendaftarannya?',
-    a: 'Gratis. Tidak ada biaya pendaftaran untuk Angkatan 18.',
+    q: 'How much does it cost to register?',
+    a: 'Nothing. There is no registration fee for Batch 18.',
   },
   {
-    q: 'Umur minimum berapa?',
-    a: 'Tergantung divisi. All Girl dan C4 minimum 13 tahun. Premier minimum 15 tahun.',
+    q: 'What is the minimum age?',
+    a: 'It depends on the division. All Girl and C4 require a minimum of 13. Premier requires 15.',
   },
   {
-    q: 'Di mana dan kapan latihannya?',
-    a: 'Lokasi dan jadwal latihan akan diinformasikan menyusul (TBA). Yang penting kamu siap berkomitmen saat jadwal ditetapkan.',
+    q: 'Where and when is training?',
+    a: 'Location and schedule will be announced later (TBA). What matters is that you are ready to commit once it is set.',
   },
   {
-    q: 'Laki-laki boleh ikut?',
-    a: 'Boleh, di divisi C4 (13+) dan Premier (15+). Divisi All Girl khusus perempuan.',
+    q: 'Can male athletes join?',
+    a: 'Yes, in C4 (13+) and Premier (15+). The All Girl division is for female athletes only.',
   },
   {
-    q: 'Kalau saya di luar Bandung?',
-    a: 'Tetap boleh mendaftar. Cantumkan domisili kamu di formulir supaya kami bisa mempertimbangkan jarak dan kesiapan latihan.',
+    q: 'What if I live outside Bandung?',
+    a: 'You can still apply. Put your location in the form so we can factor in travel and training readiness.',
   },
 ];
 
@@ -94,7 +94,7 @@ export default function RecruitmentPage() {
           </p>
 
           <h1 className="font-display mt-7 text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.82] tracking-tight text-white">
-            ANGKATAN
+            BATCH
             <br />
             <span className="text-[hsl(0_85%_58%)]">18</span>
           </h1>
@@ -102,17 +102,18 @@ export default function RecruitmentPage() {
           <div className="mt-8 grid gap-12 lg:grid-cols-[1.15fr_auto] lg:items-start lg:gap-16">
             <div>
               <p className="max-w-lg text-[17px] leading-relaxed text-white/55">
-                Enam belas kali juara nasional ICANC. Pernah mewakili Indonesia di ICU World
-                Championship, Florida. Sekarang kami mencari angkatan berikutnya.
+                Sixteen-time ICANC national champions. Several Crown athletes have represented
+                Indonesia at the ICU World Championship in Florida. Now we&apos;re looking for our
+                next batch.
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] tracking-[0.2em]">
-                <span className="bg-[hsl(0_72%_45%)] px-3.5 py-2 font-medium text-white">GRATIS</span>
+                <span className="bg-[hsl(0_72%_45%)] px-3.5 py-2 font-medium text-white">FREE TO JOIN</span>
                 <span className="border border-white/15 px-3.5 py-2 text-white/60">
-                  TANPA PENGALAMAN OK
+                  NO EXPERIENCE NEEDED
                 </span>
                 <span className="border border-white/15 px-3.5 py-2 text-white/60">
-                  13—21 AGUSTUS
+                  13—21 AUGUST
                 </span>
               </div>
 
@@ -120,7 +121,7 @@ export default function RecruitmentPage() {
                 href="#daftar"
                 className="mt-9 inline-block bg-white px-10 py-4 text-[11px] font-medium tracking-[0.2em] text-black transition-colors hover:bg-[hsl(0_85%_58%)] hover:text-white"
               >
-                {ws === 'open' ? 'DAFTAR SEKARANG' : 'LIHAT PERSYARATAN'}
+                {ws === 'open' ? 'REGISTER NOW' : 'VIEW REQUIREMENTS'}
               </a>
             </div>
 
@@ -141,7 +142,7 @@ export default function RecruitmentPage() {
                   key={i}
                   className="mx-5 text-[12px] font-medium tracking-[0.28em] text-white/90"
                 >
-                  ALL GIRL · C4 · PREMIER · ANGKATAN 18 · PENDAFTARAN GRATIS ·
+                  ALL GIRL · C4 · PREMIER · BATCH 18 · FREE TO JOIN ·
                 </span>
               ))}
             </span>
@@ -154,9 +155,9 @@ export default function RecruitmentPage() {
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="text-[10px] tracking-[0.3em] text-white/35">PILIH JALURMU</p>
+              <p className="text-[10px] tracking-[0.3em] text-white/35">CHOOSE YOUR PATH</p>
               <h2 className="font-display mt-3 text-[clamp(2.25rem,6vw,4.5rem)] leading-none text-white">
-                TIGA DIVISI
+                THREE DIVISIONS
               </h2>
             </div>
             <span className="moon-line" />
@@ -184,7 +185,7 @@ export default function RecruitmentPage() {
                     {d.minAge}+
                   </p>
                   <p className="mt-1.5 text-[10px] tracking-[0.2em] text-white/40">
-                    {d.genders.length === 1 ? 'PEREMPUAN' : 'PEREMPUAN & LAKI-LAKI'}
+                    {d.genders.length === 1 ? 'FEMALE' : 'FEMALE & MALE'}
                   </p>
                 </div>
               </div>
@@ -196,11 +197,11 @@ export default function RecruitmentPage() {
       {/* ══ REQUIREMENTS — numbered list, gold-standard hierarchy via scale ══ */}
       <section className="diagonal-stripe border-y border-white/10 px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-6xl">
-          <p className="text-[10px] tracking-[0.3em] text-white/35">YANG KAMI CARI</p>
+          <p className="text-[10px] tracking-[0.3em] text-white/35">WHAT WE LOOK FOR</p>
           <h2 className="font-display mt-3 max-w-2xl text-[clamp(2rem,5.5vw,4rem)] leading-[0.95] text-white">
-            TIGA SYARAT.
+            THREE REQUIREMENTS.
             <br />
-            <span className="text-white/30">TIDAK ADA YANG KEEMPAT.</span>
+            <span className="text-white/30">THERE IS NO FOURTH.</span>
           </h2>
 
           <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-3">
@@ -222,7 +223,7 @@ export default function RecruitmentPage() {
       {/* ══ TIMELINE — horizontal rail ══ */}
       <section className="px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-6xl">
-          <p className="text-[10px] tracking-[0.3em] text-white/35">ALUR SELEKSI</p>
+          <p className="text-[10px] tracking-[0.3em] text-white/35">SELECTION PROCESS</p>
           <div className="mt-12 grid gap-px bg-white/10 sm:grid-cols-4">
             {TIMELINE.map((t, i) => (
               <div key={i} className="bg-[#0a0a0a] px-6 py-8">
@@ -238,7 +239,7 @@ export default function RecruitmentPage() {
             ))}
           </div>
           <p className="mt-6 text-[13px] text-white/35">
-            Lokasi dan jadwal latihan akan diinformasikan menyusul.
+            Training location and schedule will be announced soon.
           </p>
         </div>
       </section>
@@ -247,13 +248,13 @@ export default function RecruitmentPage() {
       <section id="daftar" className="scroll-mt-24 px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-3xl">
           <div className="mb-12 text-center">
-            <p className="text-[10px] tracking-[0.3em] text-white/35">FORMULIR PENDAFTARAN</p>
+            <p className="text-[10px] tracking-[0.3em] text-white/35">REGISTRATION FORM</p>
             <h2 className="font-display mt-3 text-[clamp(2.25rem,6vw,4rem)] leading-none text-white">
-              DAFTAR SEKARANG
+              REGISTER NOW
             </h2>
             <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/50">
-              Tiga langkah, sekitar dua menit. Isian kamu tersimpan otomatis kalau halaman
-              tertutup.
+              Three steps, about two minutes. Your answers are saved automatically if the page
+              closes.
             </p>
           </div>
           <RecruitmentForm windowState={ws} />
@@ -264,7 +265,7 @@ export default function RecruitmentPage() {
       <section className="border-t border-white/10 px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-3xl">
           <h2 className="font-display text-[clamp(1.75rem,4.5vw,2.75rem)] leading-none text-white">
-            PERTANYAAN UMUM
+            FREQUENTLY ASKED
           </h2>
           <div className="mt-10 divide-y divide-white/10 border-y border-white/10">
             {FAQ.map((item) => (
@@ -286,9 +287,9 @@ export default function RecruitmentPage() {
       <section className="border-t border-white/10 px-6 py-20 sm:px-10 lg:px-16">
         <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-8">
           <div>
-            <p className="text-[10px] tracking-[0.3em] text-white/35">MASIH RAGU?</p>
+            <p className="text-[10px] tracking-[0.3em] text-white/35">STILL UNSURE?</p>
             <p className="font-display mt-3 text-[clamp(1.5rem,4vw,2.5rem)] leading-none text-white">
-              TANYA LANGSUNG
+              ASK US DIRECTLY
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -312,7 +313,7 @@ export default function RecruitmentPage() {
               href="/about"
               className="border border-white/15 px-7 py-3.5 text-[11px] tracking-[0.2em] text-white/70 transition-colors hover:border-[hsl(0_85%_58%)] hover:text-white"
             >
-              TENTANG CROWN
+              ABOUT CROWN
             </Link>
           </div>
         </div>

@@ -17,7 +17,7 @@ import {
 const CITIES = [
   'Bandung', 'Cimahi', 'Kab. Bandung', 'Kab. Bandung Barat', 'Sumedang', 'Garut',
   'Tasikmalaya', 'Cianjur', 'Bogor', 'Depok', 'Bekasi', 'Jakarta', 'Tangerang',
-  'Karawang', 'Purwakarta', 'Subang', 'Cirebon', 'Lainnya',
+  'Karawang', 'Purwakarta', 'Subang', 'Cirebon', 'Other',
 ];
 
 const DRAFT_KEY = 'crown-a18-draft';
@@ -39,7 +39,7 @@ const EMPTY: Form = {
   howDidYouHear: '', website: '',
 };
 
-const STEPS = ['DATA DIRI', 'CHEERLEADING', 'KOMITMEN'];
+const STEPS = ['ABOUT YOU', 'CHEERLEADING', 'COMMITMENT'];
 
 // ── Shared field chrome. Square corners + hairline borders to match the site. ──
 const inputCls =
@@ -101,29 +101,29 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
   const validateStep = (s: number): boolean => {
     const e: Record<string, string> = {};
     if (s === 0) {
-      if (f.fullName.trim().length < 3) e.fullName = 'Nama lengkap minimal 3 karakter.';
-      if (!f.birthDate) e.birthDate = 'Tanggal lahir wajib diisi.';
-      else if (age < 13) e.birthDate = `Umur kamu ${age} tahun. Minimum pendaftaran 13 tahun.`;
-      if (!f.gender) e.gender = 'Pilih jenis kelamin.';
-      if (!normalizeWhatsapp(f.whatsapp)) e.whatsapp = 'Nomor tidak valid. Contoh: 081234567890';
-      if (!f.domicileCity) e.domicileCity = 'Pilih domisili.';
+      if (f.fullName.trim().length < 3) e.fullName = 'Full name must be at least 3 characters.';
+      if (!f.birthDate) e.birthDate = 'Date of birth is required.';
+      else if (age < 13) e.birthDate = `You are ${age}. The minimum age to register is 13.`;
+      if (!f.gender) e.gender = 'Please select your gender.';
+      if (!normalizeWhatsapp(f.whatsapp)) e.whatsapp = 'Number is not valid. Example: 081234567890';
+      if (!f.domicileCity) e.domicileCity = 'Please select where you live.';
     }
     if (s === 1) {
-      if (!f.division) e.division = 'Pilih divisi.';
+      if (!f.division) e.division = 'Please select a division.';
       else {
         const b = divisionBlocker(f.division, f.gender, age);
         if (b) e.division = b;
       }
       if (!f.isBeginner && !f.previousTeam.trim()) {
-        e.previousTeam = 'Isi tim sebelumnya, atau centang "belum pernah".';
+        e.previousTeam = 'Enter your previous team, or tick "no experience".';
       }
-      if (f.position.length === 0) e.position = 'Pilih minimal satu posisi.';
+      if (f.position.length === 0) e.position = 'Choose at least one position.';
     }
     if (s === 2) {
-      if (!f.emergencyName.trim()) e.emergencyName = 'Nama kontak darurat wajib diisi.';
-      if (!normalizeWhatsapp(f.emergencyPhone)) e.emergencyPhone = 'Nomor tidak valid.';
-      if (!f.parentApproval) e.parentApproval = 'Persetujuan orang tua wajib dicentang.';
-      if (!f.commitmentAgree) e.commitmentAgree = 'Kesediaan komitmen wajib dicentang.';
+      if (!f.emergencyName.trim()) e.emergencyName = 'Emergency contact name is required.';
+      if (!normalizeWhatsapp(f.emergencyPhone)) e.emergencyPhone = 'Number is not valid.';
+      if (!f.parentApproval) e.parentApproval = 'Parental approval must be ticked.';
+      if (!f.commitmentAgree) e.commitmentAgree = 'You must confirm your commitment.';
     }
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -148,13 +148,13 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {
-        setServerError(data.message || 'Pendaftaran gagal. Coba lagi.');
+        setServerError(data.message || 'Registration failed. Please try again.');
         return;
       }
       setDone(data.regNumber);
       try { localStorage.removeItem(DRAFT_KEY); } catch {}
     } catch {
-      setServerError('Koneksi bermasalah. Periksa internet dan coba lagi.');
+      setServerError('Connection problem. Check your internet and try again.');
     } finally {
       setSubmitting(false);
     }
@@ -164,13 +164,13 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
   if (done) {
     return (
       <div className="border border-[hsl(0_85%_58%)]/25 bg-[hsl(0_72%_45%)]/[0.06] p-8 sm:p-12 text-center">
-        <p className="text-[10px] tracking-[0.3em] text-white/45">PENDAFTARAN DITERIMA</p>
+        <p className="text-[10px] tracking-[0.3em] text-white/45">REGISTRATION RECEIVED</p>
         <p className="font-display mt-5 text-[clamp(2.5rem,7vw,4.5rem)] leading-none text-white">
           {done}
         </p>
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/55">
-          Simpan nomor ini. Tim Crown akan menghubungi kamu lewat WhatsApp untuk info audisi.
-          Jadwal dan lokasi latihan akan diinformasikan menyusul.
+          Save this number. The Crown team will contact you on WhatsApp with audition details.
+          Training schedule and location will be announced soon.
         </p>
         <a
           href="https://instagram.com/crownallstar"
@@ -178,7 +178,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
           rel="noopener noreferrer"
           className="mt-8 inline-block border border-white/20 px-8 py-3.5 text-[11px] font-medium tracking-[0.2em] text-white transition-colors hover:border-[hsl(0_85%_58%)] hover:text-[hsl(0_85%_62%)]"
         >
-          IKUTI @CROWNALLSTAR
+          FOLLOW @CROWNALLSTAR
         </a>
       </div>
     );
@@ -189,12 +189,12 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
     return (
       <div className="border border-white/12 p-8 sm:p-12 text-center">
         <p className="font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-tight text-white">
-          {ws === 'before' ? 'PENDAFTARAN BELUM DIBUKA' : 'PENDAFTARAN SUDAH DITUTUP'}
+          {ws === 'before' ? 'REGISTRATION NOT OPEN YET' : 'REGISTRATION HAS CLOSED'}
         </p>
         <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/50">
           {ws === 'before'
-            ? 'Formulir akan aktif otomatis pada 13 Agustus 2026. Siapkan data kamu dari sekarang.'
-            : 'Pendaftaran Angkatan 18 ditutup 21 Agustus 2026. Ikuti Instagram kami untuk kesempatan berikutnya.'}
+            ? 'The form activates automatically on 13 August 2026. Get your details ready.'
+            : 'Batch 18 registration closed on 21 August 2026. Follow our Instagram for the next opportunity.'}
         </p>
       </div>
     );
@@ -239,20 +239,20 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         {step === 0 && (
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="sm:col-span-2">
-              <Field label="NAMA LENGKAP" htmlFor="fullName" required error={errors.fullName}>
+              <Field label="FULL NAME" htmlFor="fullName" required error={errors.fullName}>
                 <input
                   id="fullName" className={inputCls} value={f.fullName} autoComplete="name"
                   onChange={(e) => set('fullName', e.target.value)}
                   aria-invalid={!!errors.fullName}
                   aria-describedby={errors.fullName ? 'fullName-error' : undefined}
-                  placeholder="Nama sesuai identitas"
+                  placeholder="Name as on your ID"
                 />
               </Field>
             </div>
 
             <Field
-              label="TANGGAL LAHIR" htmlFor="birthDate" required error={errors.birthDate}
-              hint={age >= 0 ? `Umur kamu ${age} tahun` : 'Umur dihitung otomatis'}
+              label="DATE OF BIRTH" htmlFor="birthDate" required error={errors.birthDate}
+              hint={age >= 0 ? `You are ${age} years old` : 'Age is calculated automatically'}
             >
               <input
                 id="birthDate" type="date" className={inputCls} value={f.birthDate}
@@ -263,11 +263,12 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
               />
             </Field>
 
-            <Field label="JENIS KELAMIN" htmlFor="gender-perempuan" required error={errors.gender}>
-              <div className="flex gap-3" role="radiogroup" aria-label="Jenis kelamin">
+            <Field label="GENDER" htmlFor="gender-perempuan" required error={errors.gender}>
+              <div className="flex gap-3" role="radiogroup" aria-label="Gender">
                 {(['perempuan', 'laki-laki'] as Gender[]).map((g) => (
                   <button
                     key={g} type="button" role="radio" aria-checked={f.gender === g}
+                    aria-label={g === 'perempuan' ? 'Female' : 'Male'}
                     id={`gender-${g}`} onClick={() => set('gender', g)}
                     className={`flex-1 border px-4 py-3 text-[13px] tracking-[0.1em] transition-colors ${
                       f.gender === g
@@ -275,14 +276,14 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                         : 'border-white/12 text-white/45 hover:border-white/25'
                     }`}
                   >
-                    {g === 'perempuan' ? 'PEREMPUAN' : 'LAKI-LAKI'}
+                    {g === 'perempuan' ? 'FEMALE' : 'MALE'}
                   </button>
                 ))}
               </div>
             </Field>
 
-            <Field label="NOMOR WHATSAPP" htmlFor="whatsapp" required error={errors.whatsapp}
-              hint="Dipakai untuk info audisi">
+            <Field label="WHATSAPP NUMBER" htmlFor="whatsapp" required error={errors.whatsapp}
+              hint="We use this to contact you about auditions">
               <input
                 id="whatsapp" type="tel" inputMode="tel" className={inputCls} value={f.whatsapp}
                 onChange={(e) => set('whatsapp', e.target.value)} placeholder="08xxxxxxxxxx"
@@ -298,32 +299,32 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
               />
             </Field>
 
-            <Field label="DOMISILI" htmlFor="domicileCity" required error={errors.domicileCity}>
+            <Field label="WHERE YOU LIVE" htmlFor="domicileCity" required error={errors.domicileCity}>
               <select
                 id="domicileCity" className={inputCls} value={f.domicileCity}
                 onChange={(e) => set('domicileCity', e.target.value)}
                 aria-invalid={!!errors.domicileCity}
                 aria-describedby={errors.domicileCity ? 'domicileCity-error' : undefined}
               >
-                <option value="">Pilih kota</option>
+                <option value="">Select a city</option>
                 {CITIES.map((c) => (
                   <option key={c} value={c} className="bg-[#0a0a0a]">{c}</option>
                 ))}
               </select>
             </Field>
 
-            <Field label="KECAMATAN / DETAIL" htmlFor="domicileDetail">
+            <Field label="DISTRICT / DETAIL" htmlFor="domicileDetail">
               <input
                 id="domicileDetail" className={inputCls} value={f.domicileDetail}
-                onChange={(e) => set('domicileDetail', e.target.value)} placeholder="Opsional"
+                onChange={(e) => set('domicileDetail', e.target.value)} placeholder="Optional"
               />
             </Field>
 
             <div className="sm:col-span-2">
-              <Field label="SEKOLAH / KAMPUS" htmlFor="schoolOrCampus">
+              <Field label="SCHOOL / CAMPUS" htmlFor="schoolOrCampus">
                 <input
                   id="schoolOrCampus" className={inputCls} value={f.schoolOrCampus}
-                  onChange={(e) => set('schoolOrCampus', e.target.value)} placeholder="Opsional"
+                  onChange={(e) => set('schoolOrCampus', e.target.value)} placeholder="Optional"
                 />
               </Field>
             </div>
@@ -333,8 +334,8 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         {/* ── STEP 2 ── */}
         {step === 1 && (
           <div className="grid gap-6">
-            <Field label="PILIH DIVISI" htmlFor="division-c4" required error={errors.division}>
-              <div className="grid gap-3" role="radiogroup" aria-label="Divisi">
+            <Field label="CHOOSE YOUR DIVISION" htmlFor="division-c4" required error={errors.division}>
+              <div className="grid gap-3" role="radiogroup" aria-label="Division">
                 {DIVISIONS.map((d) => {
                   const blocker = divisionBlocker(d.id, f.gender, age);
                   const locked = !!blocker;
@@ -356,7 +357,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                           {d.name}
                         </span>
                         <span className="text-[10px] tracking-[0.2em] text-white/40">
-                          {d.genders.length === 1 ? 'PUTRI' : 'PUTRI & PUTRA'} · {d.minAge}+
+                          {d.genders.length === 1 ? 'FEMALE' : 'FEMALE & MALE'} · {d.minAge}+
                         </span>
                       </div>
                       <p className="mt-2 text-[13px] leading-relaxed text-white/45">{d.blurb}</p>
@@ -370,13 +371,13 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
               </div>
             </Field>
 
-            <Field label="TIM CHEERS SEBELUMNYA" htmlFor="previousTeam" required={!f.isBeginner}
+            <Field label="PREVIOUS CHEER TEAM" htmlFor="previousTeam" required={!f.isBeginner}
               error={errors.previousTeam}>
               <input
                 id="previousTeam" className={inputCls} value={f.previousTeam}
                 disabled={f.isBeginner}
                 onChange={(e) => set('previousTeam', e.target.value)}
-                placeholder={f.isBeginner ? 'Belum pernah — tidak perlu diisi' : 'Nama tim / sekolah'}
+                placeholder={f.isBeginner ? 'No experience — leave blank' : 'Team or school name'}
                 aria-invalid={!!errors.previousTeam}
                 aria-describedby={errors.previousTeam ? 'previousTeam-error' : undefined}
               />
@@ -392,12 +393,12 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                   }}
                   className="h-4 w-4 accent-[hsl(0_72%_45%)]"
                 />
-                Belum pernah ikut tim cheers — saya pemula
+                I have never been on a cheer team — I'm a beginner
               </label>
             </Field>
 
-            <Field label="POSISI YANG DIMINATI" htmlFor="pos-Base" required error={errors.position}
-              hint="Bisa pilih lebih dari satu">
+            <Field label="POSITIONS YOU WANT" htmlFor="pos-Base" required error={errors.position}
+              hint="You can choose more than one">
               <div className="flex flex-wrap gap-2.5">
                 {POSITIONS.map((p) => {
                   const on = f.position.includes(p);
@@ -421,7 +422,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
             </Field>
 
             <div className="grid gap-6 sm:grid-cols-3">
-              <Field label="PENGALAMAN" htmlFor="experienceYears">
+              <Field label="EXPERIENCE" htmlFor="experienceYears">
                 <select
                   id="experienceYears" className={inputCls} value={f.experienceYears}
                   onChange={(e) => set('experienceYears', e.target.value)}
@@ -431,18 +432,18 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                   ))}
                 </select>
               </Field>
-              <Field label="TINGGI (CM)" htmlFor="heightCm">
+              <Field label="HEIGHT (CM)" htmlFor="heightCm">
                 <input
                   id="heightCm" type="number" inputMode="numeric" min={100} max={220}
                   className={inputCls} value={f.heightCm}
-                  onChange={(e) => set('heightCm', e.target.value)} placeholder="Opsional"
+                  onChange={(e) => set('heightCm', e.target.value)} placeholder="Optional"
                 />
               </Field>
-              <Field label="BERAT (KG)" htmlFor="weightKg">
+              <Field label="WEIGHT (KG)" htmlFor="weightKg">
                 <input
                   id="weightKg" type="number" inputMode="numeric" min={25} max={150}
                   className={inputCls} value={f.weightKg}
-                  onChange={(e) => set('weightKg', e.target.value)} placeholder="Opsional"
+                  onChange={(e) => set('weightKg', e.target.value)} placeholder="Optional"
                 />
               </Field>
             </div>
@@ -453,8 +454,8 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         {step === 2 && (
           <div className="grid gap-6">
             <div className="grid gap-6 sm:grid-cols-2">
-              <Field label="NAMA KONTAK DARURAT" htmlFor="emergencyName" required
-                error={errors.emergencyName} hint="Orang tua atau wali">
+              <Field label="EMERGENCY CONTACT NAME" htmlFor="emergencyName" required
+                error={errors.emergencyName} hint="Parent or guardian">
                 <input
                   id="emergencyName" className={inputCls} value={f.emergencyName}
                   onChange={(e) => set('emergencyName', e.target.value)}
@@ -462,7 +463,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                   aria-describedby={errors.emergencyName ? 'emergencyName-error' : undefined}
                 />
               </Field>
-              <Field label="NOMOR KONTAK DARURAT" htmlFor="emergencyPhone" required
+              <Field label="EMERGENCY CONTACT NUMBER" htmlFor="emergencyPhone" required
                 error={errors.emergencyPhone}>
                 <input
                   id="emergencyPhone" type="tel" inputMode="tel" className={inputCls}
@@ -474,21 +475,21 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
               </Field>
             </div>
 
-            <Field label="KENAPA MAU GABUNG CROWN?" htmlFor="motivation"
-              hint={`${f.motivation.length}/500 — opsional`}>
+            <Field label="WHY DO YOU WANT TO JOIN CROWN?" htmlFor="motivation"
+              hint={`${f.motivation.length}/500 — optional`}>
               <textarea
                 id="motivation" rows={4} maxLength={500} className={`${inputCls} resize-none`}
                 value={f.motivation} onChange={(e) => set('motivation', e.target.value)}
-                placeholder="Ceritakan singkat"
+                placeholder="Tell us briefly"
               />
             </Field>
 
-            <Field label="TAHU DARI MANA?" htmlFor="howDidYouHear">
+            <Field label="HOW DID YOU HEAR ABOUT US?" htmlFor="howDidYouHear">
               <select
                 id="howDidYouHear" className={inputCls} value={f.howDidYouHear}
                 onChange={(e) => set('howDidYouHear', e.target.value)}
               >
-                <option value="">Pilih</option>
+                <option value="">Select one</option>
                 {HEARD_FROM.map((x) => (
                   <option key={x} value={x} className="bg-[#0a0a0a]">{x}</option>
                 ))}
@@ -496,7 +497,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
             </Field>
 
             <div className="border-t border-white/12 pt-6">
-              <p className={labelCls}>PERSETUJUAN <span className="text-[hsl(0_85%_58%)]">*</span></p>
+              <p className={labelCls}>CONSENT <span className="text-[hsl(0_85%_58%)]">*</span></p>
               <div className="grid gap-3.5">
                 <label className="flex cursor-pointer items-start gap-3 text-[14px] leading-relaxed text-white/65">
                   <input
@@ -505,7 +506,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                     className="mt-0.5 h-4 w-4 shrink-0 accent-[hsl(0_72%_45%)]"
                     aria-invalid={!!errors.parentApproval}
                   />
-                  Pendaftaran ini sudah disetujui orang tua / wali saya.
+                  My parent or guardian has approved this registration.
                 </label>
                 {errors.parentApproval && (
                   <p role="alert" className="text-[12px] text-[hsl(0_85%_62%)]">
@@ -519,7 +520,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                     className="mt-0.5 h-4 w-4 shrink-0 accent-[hsl(0_72%_45%)]"
                     aria-invalid={!!errors.commitmentAgree}
                   />
-                  Saya siap berkomitmen dengan jadwal latihan serta rangkaian program Crown.
+                  I am ready to commit to the training schedule and Crown's programme.
                 </label>
                 {errors.commitmentAgree && (
                   <p role="alert" className="text-[12px] text-[hsl(0_85%_62%)]">
@@ -543,21 +544,21 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
             type="button" onClick={back} disabled={step === 0}
             className="px-2 text-[11px] font-medium tracking-[0.2em] text-white/40 transition-colors hover:text-white disabled:invisible"
           >
-            ← KEMBALI
+            ← BACK
           </button>
           {step < 2 ? (
             <button
               type="button" onClick={next}
               className="bg-[hsl(0_72%_45%)] px-9 py-4 text-[11px] font-medium tracking-[0.2em] text-white transition-colors hover:bg-[hsl(0_85%_52%)]"
             >
-              LANJUT →
+              NEXT →
             </button>
           ) : (
             <button
               type="button" onClick={submit} disabled={submitting}
               className="bg-[hsl(0_72%_45%)] px-9 py-4 text-[11px] font-medium tracking-[0.2em] text-white transition-colors hover:bg-[hsl(0_85%_52%)] disabled:opacity-50"
             >
-              {submitting ? 'MENGIRIM…' : 'KIRIM PENDAFTARAN'}
+              {submitting ? 'SUBMITTING…' : 'SUBMIT REGISTRATION'}
             </button>
           )}
         </div>

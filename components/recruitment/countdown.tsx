@@ -31,10 +31,10 @@ export default function Countdown({ initialState }: { initialState: WindowState 
   const s = Math.floor((ms % 60_000) / 1000);
 
   const units: [number, string][] = [
-    [d, 'HARI'],
-    [h, 'JAM'],
-    [m, 'MENIT'],
-    [s, 'DETIK'],
+    [d, 'DAYS'],
+    [h, 'HOURS'],
+    [m, 'MINS'],
+    [s, 'SECS'],
   ];
 
   return (
