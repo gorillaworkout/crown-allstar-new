@@ -134,19 +134,29 @@ export async function POST(request: Request) {
 
     // 6. Rate limit. Must be shared state, not process memory — Vercel serverless
     //    spreads requests across instances, so an in-memory counter would never trip.
+    //    Kept as a single doc per IP: a two-field query (ip + createdAt) would need a
+    //    composite index, which is easy to forget to create and fails closed at runtime.
     const ip =
       request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
       request.headers.get('x-real-ip') ||
       'unknown';
     if (ip !== 'unknown') {
-      const hourAgo = new Date(Date.now() - 3600_000);
-      const recent = await col
-        .where('ip', '==', ip)
-        .where('createdAt', '>=', hourAgo)
-        .limit(MAX_PER_IP_PER_HOUR)
-        .get();
-      if (recent.size >= MAX_PER_IP_PER_HOUR) {
-        return bad('Too many registrations from this network. Please try again later.', 429);
+      // Firestore doc ids can't contain '/', and IPv6 uses ':'.
+      const ipKey = ip.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 128);
+      const rlRef = db.collection('crown-ratelimits').doc(`recruit-${ipKey}`);
+      const rl = await rlRef.get();
+      const now = Date.now();
+      const windowStart = (rl.exists ? rl.data()?.windowStart?.toMillis?.() : 0) || 0;
+      const count = (rl.exists ? (rl.data()?.count as number) : 0) || 0;
+
+      if (now - windowStart < 3600_000) {
+        if (count >= MAX_PER_IP_PER_HOUR) {
+          return bad('Too many registrations from this network. Please try again later.', 429);
+        }
+        await rlRef.set({ count: count + 1 }, { merge: true });
+      } else {
+        // Window expired (or first ever hit) — start a fresh one.
+        await rlRef.set({ count: 1, windowStart: new Date() });
       }
     }
 
