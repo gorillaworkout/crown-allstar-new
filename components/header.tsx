@@ -14,6 +14,7 @@ const navItems = [
 ]
 
 const activityDropdown = [
+  { name: "RECRUITMENT A18", path: "/recruitment" },
   { name: "MAKRAB 2026", path: "/makrab-2026" },
   { name: "SUPPORT", path: "/contact" },
 ]
@@ -136,8 +137,8 @@ export default function Header() {
             </div>
 
             <Link
-              href="/contact"
-              className="text-[13px] font-semibold tracking-[0.15em] px-6 py-2.5 border border-[hsl(45,93%,58%)] text-[hsl(45,93%,58%)] hover:bg-[hsl(45,93%,58%)] hover:text-black transition-all duration-300"
+              href="/recruitment"
+              className="text-[13px] font-semibold tracking-[0.15em] px-6 py-2.5 border border-[hsl(0,85%,58%)] text-[hsl(0,85%,58%)] hover:bg-[hsl(0,85%,58%)] hover:text-white transition-all duration-300"
             >
               JOIN US
             </Link>
@@ -208,8 +209,8 @@ export default function Header() {
             </div>
 
             <Link
-              href="/contact"
-              className="font-display text-2xl tracking-wider text-[hsl(45,93%,58%)] border border-[hsl(45,93%,58%)] px-6 py-3 text-center mt-2"
+              href="/recruitment"
+              className="font-display text-2xl tracking-wider text-[hsl(0,85%,58%)] border border-[hsl(0,85%,58%)] px-6 py-3 text-center mt-2"
             >
               JOIN US
             </Link>

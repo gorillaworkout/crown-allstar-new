@@ -347,3 +347,81 @@
 .float-up {
   animation: float-up linear infinite;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   RED MOON — Recruitment Angkatan 18 only.
+   Reuses the site's structural language (hard corners, hairlines,
+   Bebas display, letterspaced micro-caps) and swaps gold for crimson.
+   ══════════════════════════════════════════════════════════════════ */
+.redmoon {
+  --moon: 0 72% 45%;
+  --moon-bright: 0 85% 58%;
+  --moon-deep: 0 65% 28%;
+}
+
+/* The moon itself: one flat disc + one soft halo. No gradient mesh. */
+.moon-disc {
+  background: radial-gradient(
+    circle at 38% 32%,
+    hsl(var(--moon-bright)) 0%,
+    hsl(var(--moon)) 46%,
+    hsl(var(--moon-deep)) 100%
+  );
+  box-shadow:
+    0 0 60px hsl(var(--moon) / 0.42),
+    0 0 140px hsl(var(--moon) / 0.2),
+    inset -14px -22px 60px hsl(0 0% 0% / 0.55);
+}
+
+/* Craters — flat dark blooms, kept few and irregular on purpose. */
+.moon-crater {
+  position: absolute;
+  border-radius: 9999px;
+  background: hsl(var(--moon-deep) / 0.55);
+  filter: blur(1px);
+}
+
+/* Very slow drift so the moon never looks like a spinning loader. */
+@keyframes moon-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.moon-drift { animation: moon-drift 14s ease-in-out infinite; }
+
+/* Haze bands crossing the disc. */
+@keyframes haze {
+  0% { transform: translateX(-8%); opacity: 0.35; }
+  50% { opacity: 0.6; }
+  100% { transform: translateX(8%); opacity: 0.35; }
+}
+.moon-haze { animation: haze 18s ease-in-out infinite; }
+
+/* Rising embers. Slow, sparse, low opacity. */
+@keyframes ember-rise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  12%  { opacity: 0.55; }
+  85%  { opacity: 0.2; }
+  100% { transform: translateY(-62vh) translateX(14px); opacity: 0; }
+}
+.ember { animation: ember-rise linear infinite; }
+
+.moon-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--moon-bright)), hsl(var(--moon-deep)));
+}
+
+/* Countdown digits reuse the stat-number treatment with a crimson ramp. */
+.count-digit {
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 1;
+  background: linear-gradient(180deg, hsl(var(--moon-bright)) 0%, hsl(var(--moon)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moon-drift, .moon-haze, .ember { animation: none !important; }
+  .ember { opacity: 0 !important; }
+}
