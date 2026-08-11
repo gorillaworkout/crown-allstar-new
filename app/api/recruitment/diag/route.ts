@@ -12,10 +12,37 @@ export async function GET() {
   const blob = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 
   let writeError: string | null = null;
+  let compositeQueryError: string | null = null;
+  let transactionError: string | null = null;
   try {
     const { getDb } = await import('@/lib/firebase-admin');
+    const db = getDb();
+    const col = db.collection('crown-recruits');
     // Cheapest possible authenticated round-trip.
-    await getDb().collection('crown-recruits').limit(1).get();
+    await col.limit(1).get();
+
+    // The rate-limit query: ip == X AND createdAt >= Y needs a composite index.
+    try {
+      await col
+        .where('ip', '==', '1.2.3.4')
+        .where('createdAt', '>=', new Date(Date.now() - 3600_000))
+        .limit(3)
+        .get();
+    } catch (err) {
+      compositeQueryError = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+    }
+
+    // Transaction on the counter doc, rolled back so nothing is persisted.
+    try {
+      const counterRef = db.collection('crown-counters').doc('recruits-a18');
+      await db.runTransaction(async (tx) => {
+        await tx.get(counterRef);
+        throw new Error('__rollback__');
+      });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      transactionError = msg === '__rollback__' ? null : msg;
+    }
   } catch (err) {
     writeError = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
   }
@@ -33,5 +60,7 @@ export async function GET() {
     hasServiceAccountBlob: Boolean(blob),
     firestoreReachable: writeError === null,
     firestoreError: writeError,
+    compositeQueryError,
+    transactionError,
   });
 }
