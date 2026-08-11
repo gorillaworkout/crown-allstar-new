@@ -20,7 +20,7 @@ const philosophy = [
   },
   {
     title: "REPRESENT WITH PRIDE",
-    desc: "When we step on the mat, we carry the flag. Selected as Indonesia's National Team in 2012 and 2014, and continuing to represent at ICU Asian and World Championships — we prove Indonesian cheerleading belongs on the global stage.",
+    desc: "When we step on the mat, we carry the flag. Selected as Indonesia's National Team in 2012 and 2014, and our athletes continue to compete for Indonesia at ICU Asian and World Championships — we prove Indonesian cheerleading belongs on the global stage.",
   },
 ]
 
@@ -168,8 +168,9 @@ export default function AboutPage() {
               <p className="text-white/40 leading-relaxed">
                 We kept winning nationally — 6 consecutive titles became 10, then 14, then 16. 
                 We earned bronze at the ICU Asian Championship in 2023, silver at BICO, gold 
-                at APCC 2024, gold at International Cheer Challenge 2025 in Bangkok, and were 
-                selected again for the ICU World Championship. Every medal was earned through 
+                at APCC 2024, gold at International Cheer Challenge 2025 in Bangkok, and saw 
+                several of our athletes selected to compete for Indonesia at the ICU World 
+                Championship. Every medal was earned through 
                 relentless training and the combined support of everyone who believed in 
                 Indonesian cheerleading.
               </p>

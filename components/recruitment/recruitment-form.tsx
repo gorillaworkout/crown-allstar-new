@@ -24,7 +24,8 @@ const DRAFT_KEY = 'crown-a18-draft';
 
 type Form = {
   fullName: string; birthDate: string; gender: Gender | ''; whatsapp: string;
-  instagram: string; domicileCity: string; domicileDetail: string; schoolOrCampus: string;
+  instagram: string; domicileCity: string; domicileCityOther: string;
+  domicileDetail: string; schoolOrCampus: string;
   division: Division | ''; previousTeam: string; isBeginner: boolean; position: string[];
   experienceYears: string; heightCm: string; weightKg: string; motivation: string;
   emergencyName: string; emergencyPhone: string; parentApproval: boolean;
@@ -33,7 +34,8 @@ type Form = {
 
 const EMPTY: Form = {
   fullName: '', birthDate: '', gender: '', whatsapp: '', instagram: '', domicileCity: '',
-  domicileDetail: '', schoolOrCampus: '', division: '', previousTeam: '', isBeginner: false,
+  domicileCityOther: '', domicileDetail: '', schoolOrCampus: '', division: '',
+  previousTeam: '', isBeginner: false,
   position: [], experienceYears: EXPERIENCE[0], heightCm: '', weightKg: '', motivation: '',
   emergencyName: '', emergencyPhone: '', parentApproval: false, commitmentAgree: false,
   howDidYouHear: '', website: '',
@@ -43,9 +45,19 @@ const STEPS = ['ABOUT YOU', 'CHEERLEADING', 'COMMITMENT'];
 
 // ── Shared field chrome. Square corners + hairline borders to match the site. ──
 const inputCls =
-  'w-full bg-white/[0.03] border border-white/12 px-4 py-3 text-[15px] text-white ' +
-  'placeholder:text-white/25 outline-none transition-colors focus:border-[hsl(0_85%_58%)] ' +
-  'focus:bg-white/[0.05]';
+  'w-full min-w-0 max-w-full bg-white/[0.03] border border-white/12 px-4 py-3 text-[15px] ' +
+  'text-white placeholder:text-white/25 outline-none transition-colors ' +
+  'focus:border-[hsl(0_85%_58%)] focus:bg-white/[0.05]';
+
+// iOS Safari gives <input type="date"> an intrinsic width from its native picker,
+// which ignores w-full and pushes past the container's padding. appearance-none plus
+// a fixed height and min-w-0 makes it obey the grid like every other field.
+const dateInputCls =
+  inputCls +
+  ' appearance-none [-webkit-appearance:none] h-[50px] leading-none ' +
+  '[&::-webkit-date-and-time-value]:text-left [&::-webkit-date-and-time-value]:m-0 ' +
+  '[&::-webkit-calendar-picker-indicator]:opacity-60 ' +
+  '[&::-webkit-calendar-picker-indicator]:cursor-pointer';
 const labelCls = 'block mb-2 text-[10px] font-medium tracking-[0.22em] text-white/45';
 
 function Field({
@@ -107,6 +119,8 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
       if (!f.gender) e.gender = 'Please select your gender.';
       if (!normalizeWhatsapp(f.whatsapp)) e.whatsapp = 'Number is not valid. Example: 081234567890';
       if (!f.domicileCity) e.domicileCity = 'Please select where you live.';
+      else if (f.domicileCity === 'Other' && f.domicileCityOther.trim().length < 3)
+        e.domicileCityOther = 'Please type the name of your city.';
     }
     if (s === 1) {
       if (!f.division) e.division = 'Please select a division.';
@@ -142,6 +156,10 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...f,
+          // Send the typed city, not the literal "Other" — otherwise the dashboard
+          // shows "Other" for every out-of-list applicant and the answer is lost.
+          domicileCity:
+            f.domicileCity === 'Other' ? f.domicileCityOther.trim() : f.domicileCity,
           heightCm: f.heightCm ? Number(f.heightCm) : null,
           weightKg: f.weightKg ? Number(f.weightKg) : null,
         }),
@@ -255,7 +273,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
               hint={age >= 0 ? `You are ${age} years old` : 'Age is calculated automatically'}
             >
               <input
-                id="birthDate" type="date" className={inputCls} value={f.birthDate}
+                id="birthDate" type="date" className={dateInputCls} value={f.birthDate}
                 max="2015-12-31" min="1970-01-01"
                 onChange={(e) => set('birthDate', e.target.value)}
                 aria-invalid={!!errors.birthDate}
@@ -270,7 +288,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                     key={g} type="button" role="radio" aria-checked={f.gender === g}
                     aria-label={g === 'perempuan' ? 'Female' : 'Male'}
                     id={`gender-${g}`} onClick={() => set('gender', g)}
-                    className={`flex-1 border px-4 py-3 text-[13px] tracking-[0.1em] transition-colors ${
+                    className={`flex-1 min-w-0 border px-2 py-3 text-[13px] tracking-[0.1em] transition-colors sm:px-4 ${
                       f.gender === g
                         ? 'border-[hsl(0_85%_58%)] bg-[hsl(0_72%_45%)]/12 text-white'
                         : 'border-white/12 text-white/45 hover:border-white/25'
@@ -312,6 +330,23 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                 ))}
               </select>
             </Field>
+
+            {f.domicileCity === 'Other' && (
+              <Field
+                label="YOUR CITY" htmlFor="domicileCityOther" required
+                error={errors.domicileCityOther} hint="Not in the list above"
+              >
+                <input
+                  id="domicileCityOther" className={inputCls} value={f.domicileCityOther}
+                  onChange={(e) => set('domicileCityOther', e.target.value)}
+                  placeholder="Type your city or regency"
+                  aria-invalid={!!errors.domicileCityOther}
+                  aria-describedby={
+                    errors.domicileCityOther ? 'domicileCityOther-error' : undefined
+                  }
+                />
+              </Field>
+            )}
 
             <Field label="DISTRICT / DETAIL" htmlFor="domicileDetail">
               <input
