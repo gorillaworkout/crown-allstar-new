@@ -25,3 +25,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# repo pakai pnpm — cegah lockfile npm ikut ter-commit
+package-lock.json
