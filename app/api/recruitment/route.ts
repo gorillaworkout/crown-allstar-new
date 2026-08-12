@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   // 1. Window check — server is authoritative. Hiding the form client-side is not enough.
   const state = windowState();
   if (state === 'before') {
-    return bad('Batch 18 registration is not open yet. It opens 13 August 2026.', 403);
+    return bad('Batch 18 registration is not open yet. It opens 12 August 2026.', 403);
   }
   if (state === 'closed') {
     return bad('Batch 18 registration closed on 21 August 2026.', 403);

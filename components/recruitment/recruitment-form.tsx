@@ -105,7 +105,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
 
   useEffect(() => {
     if (done) return;
-    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...f, website: '' })); } catch {}
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...f, website: '' })); } catch { }
   }, [f, done]);
 
   const age = useMemo(() => (f.birthDate ? ageAt(f.birthDate) : -1), [f.birthDate]);
@@ -170,7 +170,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         return;
       }
       setDone(data.regNumber);
-      try { localStorage.removeItem(DRAFT_KEY); } catch {}
+      try { localStorage.removeItem(DRAFT_KEY); } catch { }
     } catch {
       setServerError('Connection problem. Check your internet and try again.');
     } finally {
@@ -211,7 +211,7 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         </p>
         <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/50">
           {ws === 'before'
-            ? 'The form activates automatically on 13 August 2026. Get your details ready.'
+            ? 'The form activates automatically on 12 August 2026. Get your details ready.'
             : 'Batch 18 registration closed on 21 August 2026. Follow our Instagram for the next opportunity.'}
         </p>
       </div>
@@ -225,13 +225,12 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         {STEPS.map((s, i) => (
           <div
             key={s}
-            className={`flex-1 px-3 py-4 text-center text-[9px] font-medium tracking-[0.2em] transition-colors sm:text-[10px] ${
-              i === step
+            className={`flex-1 px-3 py-4 text-center text-[9px] font-medium tracking-[0.2em] transition-colors sm:text-[10px] ${i === step
                 ? 'bg-[hsl(0_72%_45%)]/12 text-[hsl(0_85%_62%)]'
                 : i < step
                   ? 'text-white/45'
                   : 'text-white/20'
-            }`}
+              }`}
             aria-current={i === step ? 'step' : undefined}
           >
             <span className="tabular-nums">{String(i + 1).padStart(2, '0')}</span>
@@ -288,11 +287,10 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                     key={g} type="button" role="radio" aria-checked={f.gender === g}
                     aria-label={g === 'perempuan' ? 'Female' : 'Male'}
                     id={`gender-${g}`} onClick={() => set('gender', g)}
-                    className={`flex-1 min-w-0 border px-2 py-3 text-[13px] tracking-[0.1em] transition-colors sm:px-4 ${
-                      f.gender === g
+                    className={`flex-1 min-w-0 border px-2 py-3 text-[13px] tracking-[0.1em] transition-colors sm:px-4 ${f.gender === g
                         ? 'border-[hsl(0_85%_58%)] bg-[hsl(0_72%_45%)]/12 text-white'
                         : 'border-white/12 text-white/45 hover:border-white/25'
-                    }`}
+                      }`}
                   >
                     {g === 'perempuan' ? 'FEMALE' : 'MALE'}
                   </button>
@@ -379,13 +377,12 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                       key={d.id} type="button" role="radio" id={`division-${d.id}`}
                       aria-checked={f.division === d.id} disabled={locked}
                       onClick={() => !locked && set('division', d.id)}
-                      className={`border p-5 text-left transition-colors ${
-                        locked
+                      className={`border p-5 text-left transition-colors ${locked
                           ? 'cursor-not-allowed border-white/8 opacity-45'
                           : f.division === d.id
                             ? 'border-[hsl(0_85%_58%)] bg-[hsl(0_72%_45%)]/10'
                             : 'border-white/12 hover:border-white/30'
-                      }`}
+                        }`}
                     >
                       <div className="flex flex-wrap items-baseline justify-between gap-2">
                         <span className="font-display text-[1.6rem] leading-none text-white">
@@ -443,11 +440,10 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
                       onClick={() =>
                         set('position', on ? f.position.filter((x) => x !== p) : [...f.position, p])
                       }
-                      className={`border px-4 py-2.5 text-[12px] tracking-[0.1em] transition-colors ${
-                        on
+                      className={`border px-4 py-2.5 text-[12px] tracking-[0.1em] transition-colors ${on
                           ? 'border-[hsl(0_85%_58%)] bg-[hsl(0_72%_45%)]/12 text-white'
                           : 'border-white/12 text-white/45 hover:border-white/30'
-                      }`}
+                        }`}
                     >
                       {p.toUpperCase()}
                     </button>
