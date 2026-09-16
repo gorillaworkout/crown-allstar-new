@@ -14,6 +14,7 @@ const navItems = [
 ]
 
 const activityDropdown = [
+  { name: "ANNIVERSARY 2026", path: "/anniversary-2026" },
   { name: "RECRUITMENT A18", path: "/recruitment" },
   { name: "MAKRAB 2026", path: "/makrab-2026" },
   { name: "SUPPORT", path: "/contact" },
@@ -49,7 +50,7 @@ export default function Header() {
   }, [])
 
   const isActive = (path: string) => pathname === path
-  const isActivityActive = pathname === "/makrab-2026" || pathname === "/support"
+  const isActivityActive = activityDropdown.some((item) => item.path === pathname)
 
   return (
     <header
