@@ -25,12 +25,50 @@ const PALETTES = [
   "border-[#0038A8]/45 bg-[#0038A8]/[0.14] text-[#C9D8FF]",
 ]
 
+/* Six travel directions. Each entry returns the start/mid/end offsets and the
+   anchor position, so bubbles enter from every edge instead of only the bottom. */
+const DIRECTIONS = [
+  // up: bottom → top
+  (r: number) => ({
+    pos: { left: `${5 + r * 72}%`, top: "0%" },
+    from: [0, 460], mid: [(r * 2 - 1) * 45, 150], to: [0, -180],
+  }),
+  // down: top → bottom
+  (r: number) => ({
+    pos: { left: `${5 + r * 72}%`, top: "0%" },
+    from: [0, -220], mid: [(r * 2 - 1) * 45, 140], to: [0, 480],
+  }),
+  // left → right
+  (r: number) => ({
+    pos: { left: "0%", top: `${8 + r * 68}%` },
+    from: [-340, 0], mid: [140, (r * 2 - 1) * 40], to: [640, 0],
+  }),
+  // right → left
+  (r: number) => ({
+    pos: { left: "0%", top: `${8 + r * 68}%` },
+    from: [640, 0], mid: [180, (r * 2 - 1) * 40], to: [-340, 0],
+  }),
+  // diagonal: bottom-left → top-right
+  (r: number) => ({
+    pos: { left: `${4 + r * 40}%`, top: `${20 + r * 50}%` },
+    from: [-260, 340], mid: [40, 60], to: [420, -280],
+  }),
+  // diagonal: top-right → bottom-left
+  (r: number) => ({
+    pos: { left: `${18 + r * 45}%`, top: `${6 + r * 40}%` },
+    from: [400, -280], mid: [60, 40], to: [-280, 360],
+  }),
+]
+
 function Bubble({ wish, index, still }: { wish: Wish; index: number; still: boolean }) {
-  const lane = hashFloat(wish.id, 1)
-  const delay = hashFloat(wish.id, 2) * 14
-  const duration = 22 + hashFloat(wish.id, 3) * 16
-  const drift = (hashFloat(wish.id, 4) * 2 - 1) * 40
+  const r = hashFloat(wish.id, 1)
+  const delay = hashFloat(wish.id, 2) * 16
+  const duration = 20 + hashFloat(wish.id, 3) * 18
+  const dirIndex = Math.floor(hashFloat(wish.id, 5) * DIRECTIONS.length) % DIRECTIONS.length
+  const tilt = (hashFloat(wish.id, 6) * 2 - 1) * 6
   const palette = PALETTES[index % PALETTES.length]
+
+  const d = DIRECTIONS[dirIndex](r)
 
   return (
     <div
@@ -38,12 +76,17 @@ function Bubble({ wish, index, still }: { wish: Wish; index: number; still: bool
       style={
         still
           ? undefined
-          : {
-              left: `${6 + lane * 74}%`,
-              animation: `wish-rise ${duration}s linear ${delay}s infinite`,
-              // custom prop consumed by the keyframes for horizontal sway
-              ["--drift" as string]: `${drift}px`,
-            }
+          : ({
+              ...d.pos,
+              animation: `wish-drift ${duration}s linear ${delay}s infinite`,
+              "--fx": `${d.from[0]}px`,
+              "--fy": `${d.from[1]}px`,
+              "--mx": `${d.mid[0]}px`,
+              "--my": `${d.mid[1]}px`,
+              "--tx": `${d.to[0]}px`,
+              "--ty": `${d.to[1]}px`,
+              "--rot": `${tilt}deg`,
+            } as React.CSSProperties)
       }
     >
       <div
@@ -123,7 +166,8 @@ export default function WishWall() {
   }
 
   // Cap what floats so the section never turns into soup on a phone.
-  const floating = useMemo(() => wishes.slice(0, 14), [wishes])
+  // 18 across 6 directions ≈ 3 per direction: busy but still readable.
+  const floating = useMemo(() => wishes.slice(0, 18), [wishes])
 
   // Respect the OS "reduce motion" setting: show a readable stack instead.
   const [still, setStill] = useState(false)
@@ -153,7 +197,7 @@ export default function WishWall() {
           <div className="racing-stripe h-1 w-28 mx-auto mb-5" />
           <p className="text-white/45 text-sm sm:text-base max-w-xl mx-auto">
             Every member and senior is welcome to write something — a birthday wish,
-            a memory, or just hello. Your words float up on the wall below.
+            a memory, or just hello. Your words fly across the wall below.
           </p>
         </div>
 
@@ -162,14 +206,16 @@ export default function WishWall() {
           className={
             still
               ? "mb-12 border border-white/5 bg-black/30 p-5 space-y-3 max-h-[440px] overflow-y-auto"
-              : "relative h-[380px] sm:h-[440px] mb-12 border border-white/5 bg-black/30 overflow-hidden"
+              : "relative h-[460px] sm:h-[520px] mb-12 border border-white/5 bg-black/30 overflow-hidden"
           }
         >
-          {/* fade top/bottom so bubbles dissolve rather than clip */}
+          {/* fade every edge — bubbles now enter from all four sides */}
           {!still && (
             <>
-              <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
-              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />
+              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />
+              <div className="absolute inset-y-0 left-0 w-14 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
             </>
           )}
 
