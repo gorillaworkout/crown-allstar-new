@@ -449,3 +449,41 @@
 
 /* Reduced-motion handling lives in components/wish-wall.tsx: it swaps the
    floating layout for a static scrollable stack, so no CSS override is needed. */
+
+/* ── RAC1N9 theme: checkered flag, speed lines, racing stripe ── */
+.checker-strip {
+  background-image:
+    linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%),
+    linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%);
+  background-size: 22px 22px;
+  background-position: 0 0, 11px 11px;
+  background-color: #0a0a0a;
+}
+
+.racing-stripe {
+  background: linear-gradient(
+    90deg,
+    #E10600 0%, #E10600 33.33%,
+    #ffffff 33.33%, #ffffff 66.66%,
+    #0038A8 66.66%, #0038A8 100%
+  );
+}
+
+@keyframes speed-dash {
+  0% { transform: translateX(-100%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(220%); opacity: 0; }
+}
+
+.speed-line {
+  position: absolute;
+  height: 2px;
+  border-radius: 2px;
+  animation: speed-dash linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speed-line { animation: none !important; opacity: 0.25 !important; }
+}

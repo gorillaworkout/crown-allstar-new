@@ -1,20 +1,21 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Crown Anniversary 2026 — Invitation | Crown Allstar",
+  title: "RAC1N9 for More — Crown Allstar 19th Anniversary",
   description:
-    "You're invited to the Crown Allstar anniversary celebration on 26 September 2026 in Bandung. Special performance by Batch 18, cake cutting, gift exchange, and a prayer together.",
+    "Crown All-Stars 19th Anniversary — RAC1N9 for More. Saturday, 26 September 2026 in Bandung. Dress code red and blue. Batch 18 special performance, cake cutting, gift exchange, and a prayer together.",
   keywords: [
-    "Crown Allstar anniversary 2026",
-    "Crown Allstar invitation",
+    "Crown Allstar 19th anniversary",
+    "RAC1N9 for More",
+    "Crown19thAnniversary",
+    "rac1n9",
     "cheerleading Bandung",
     "Crown Allstar Batch 18",
-    "Crown Allstar 26 September 2026",
   ],
   openGraph: {
-    title: "Crown Anniversary 2026 — Invitation | Crown Allstar",
+    title: "RAC1N9 for More — Crown Allstar 19th Anniversary",
     description:
-      "26 September 2026, Bandung. One night for every Crown member and senior: Batch 18 special performance, cake cutting, gift exchange, prayer together.",
+      "Saturday, 26 September 2026, Bandung. Dress code: red and blue. Leave your wish for Crown on the wall.",
     url: "https://www.crownallstar.com/anniversary-2026",
     siteName: "Crown Allstar",
     type: "website",
@@ -24,14 +25,14 @@ export const metadata: Metadata = {
         url: "/og-anniversary-2026.jpg",
         width: 1200,
         height: 630,
-        alt: "Crown Allstar Anniversary 2026 — 26 September, Bandung",
+        alt: "Crown Allstar 19th Anniversary — RAC1N9 for More, 26 September 2026, Bandung",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Crown Anniversary 2026 — Invitation | Crown Allstar",
-    description: "26 September 2026, Bandung. An invitation for every Crown member and senior.",
+    title: "RAC1N9 for More — Crown Allstar 19th Anniversary",
+    description: "Saturday, 26 September 2026, Bandung. Dress code: red and blue.",
     images: ["/og-anniversary-2026.jpg"],
   },
   alternates: {

@@ -20,9 +20,9 @@ function hashFloat(seed: string, salt: number) {
 }
 
 const PALETTES = [
-  "border-[#FFD700]/30 bg-[#FFD700]/[0.07] text-[#FFE97A]",
-  "border-white/15 bg-white/[0.05] text-white/85",
-  "border-[#FFD700]/20 bg-black/50 text-white/80",
+  "border-[#E10600]/40 bg-[#E10600]/[0.10] text-white/90",
+  "border-white/20 bg-white/[0.06] text-white/90",
+  "border-[#0038A8]/45 bg-[#0038A8]/[0.14] text-[#C9D8FF]",
 ]
 
 function Bubble({ wish, index, still }: { wish: Wish; index: number; still: boolean }) {
@@ -138,19 +138,19 @@ export default function WishWall() {
   return (
     <section className="relative py-24 sm:py-32 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0b0a04] to-black" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-[#FFD700]/[0.04] rounded-full blur-[130px]" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-[#E10600]/[0.05] rounded-full blur-[130px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="text-center mb-12 reveal">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <MessageCircle className="w-5 h-5 text-[#FFD700]" />
-            <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">Wish Wall</span>
-            <MessageCircle className="w-5 h-5 text-[#FFD700]" />
+            <MessageCircle className="w-5 h-5 text-[#E10600]" />
+            <span className="text-white/60 text-xs tracking-[0.3em] uppercase">Wish Wall</span>
+            <MessageCircle className="w-5 h-5 text-[#E10600]" />
           </div>
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl tracking-wider text-white mb-4">
-            LEAVE YOUR <span className="text-[#FFD700]">MESSAGE</span>
+            LEAVE YOUR <span className="text-[#E10600]">MESSAGE</span>
           </h2>
-          <div className="gold-line mx-auto mb-5" />
+          <div className="racing-stripe h-1 w-28 mx-auto mb-5" />
           <p className="text-white/45 text-sm sm:text-base max-w-xl mx-auto">
             Every member and senior is welcome to write something — a birthday wish,
             a memory, or just hello. Your words float up on the wall below.
@@ -175,11 +175,11 @@ export default function WishWall() {
 
           {loading ? (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Loader2 className="w-5 h-5 text-[#FFD700]/50 animate-spin" />
+              <Loader2 className="w-5 h-5 text-white/50 animate-spin" />
             </div>
           ) : floating.length === 0 ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-              <Sparkles className="w-7 h-7 text-[#FFD700]/40 mb-3" />
+              <Sparkles className="w-7 h-7 text-white/40 mb-3" />
               <p className="text-white/40 text-sm">
                 No messages yet. Be the first to write one.
               </p>
@@ -198,7 +198,7 @@ export default function WishWall() {
               maxLength={MAX_NAME}
               placeholder="Your name"
               aria-label="Your name"
-              className="bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-[#FFD700]/40 focus:outline-none transition-colors"
+              className="bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-[#E10600]/50 focus:outline-none transition-colors"
             />
             <input
               value={batch}
@@ -206,7 +206,7 @@ export default function WishWall() {
               maxLength={20}
               placeholder="Batch / division (optional)"
               aria-label="Batch or division"
-              className="bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-[#FFD700]/40 focus:outline-none transition-colors"
+              className="bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-[#E10600]/50 focus:outline-none transition-colors"
             />
           </div>
 
@@ -218,7 +218,7 @@ export default function WishWall() {
               rows={3}
               placeholder="Write your message for Crown…"
               aria-label="Your message"
-              className="w-full bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-[#FFD700]/40 focus:outline-none transition-colors resize-none"
+              className="w-full bg-white/[0.03] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-[#E10600]/50 focus:outline-none transition-colors resize-none"
             />
             <span className="absolute bottom-3 right-3 text-[10px] text-white/25 tabular-nums">
               {message.length}/{MAX_MESSAGE}
@@ -237,12 +237,12 @@ export default function WishWall() {
           />
 
           {error && <p className="text-red-400/80 text-xs mb-3">{error}</p>}
-          {sent && <p className="text-[#FFD700] text-xs mb-3">Thank you — your message is on the wall.</p>}
+          {sent && <p className="text-[#8FB0FF] text-xs mb-3">Thank you — your message is on the wall.</p>}
 
           <button
             type="submit"
             disabled={sending}
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FFD700] via-[#F5C000] to-[#FFD700] text-black font-semibold text-sm tracking-wide px-8 py-3.5 shadow-lg shadow-[#FFD700]/25 hover:shadow-xl hover:shadow-[#FFD700]/45 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E10600] via-[#C10500] to-[#0038A8] text-white font-semibold text-sm tracking-wide px-8 py-3.5 shadow-lg shadow-[#E10600]/30 hover:shadow-xl hover:shadow-[#0038A8]/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           >
             {sending ? (
               <>
