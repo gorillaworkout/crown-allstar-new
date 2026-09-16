@@ -33,7 +33,7 @@ const EVENT = {
   timeLabel: "6:00 PM",
   city: "Bandung",
   venue: "To be announced",
-  dresscode: "Smart casual — a touch of black & gold",
+  dresscode: "Red, white, or blue Crown kit — or any Crown tee you love",
   giftNote: "Bring one gift to exchange",
 }
 
@@ -220,7 +220,7 @@ function DetailsSection() {
     { icon: Calendar, label: "DATE", value: "26 Sept", sub: `${EVENT.dayLabel}, 2026` },
     { icon: Clock, label: "TIME", value: EVENT.timeLabel, sub: "Doors open 30 minutes earlier" },
     { icon: MapPin, label: "LOCATION", value: EVENT.city, sub: EVENT.venue },
-    { icon: Shirt, label: "DRESS CODE", value: "Black & Gold", sub: EVENT.dresscode },
+    { icon: Shirt, label: "DRESS CODE", value: "Crown Colors", sub: EVENT.dresscode },
   ]
 
   return (
@@ -250,6 +250,13 @@ function DetailsSection() {
                 <item.icon className="w-7 h-7 sm:w-8 sm:h-8 mb-5 text-[#FFD700] group-hover:scale-110 transition-transform duration-300" />
                 <p className="text-white/30 text-[10px] sm:text-xs tracking-[0.2em] mb-2">{item.label}</p>
                 <p className="font-display text-xl sm:text-2xl tracking-wider text-white mb-1">{item.value}</p>
+                {item.label === "DRESS CODE" && (
+                  <div className="flex items-center gap-1.5 mb-2" aria-hidden="true">
+                    <span className="w-3 h-3 rounded-full bg-[#D62828] ring-1 ring-white/20" />
+                    <span className="w-3 h-3 rounded-full bg-white ring-1 ring-white/20" />
+                    <span className="w-3 h-3 rounded-full bg-[#1D4ED8] ring-1 ring-white/20" />
+                  </div>
+                )}
                 <p className="text-white/40 text-xs sm:text-sm">{item.sub}</p>
               </div>
             </div>
@@ -264,7 +271,7 @@ function DetailsSection() {
    MARQUEE
    ══════════════════════════════════════════════ */
 function MarqueeBanner() {
-  const words = ["CROWN ANNIVERSARY", "26 SEPTEMBER 2026", "BANDUNG", "BATCH 18", "BLACK & GOLD"]
+  const words = ["CROWN ANNIVERSARY", "26 SEPTEMBER 2026", "BANDUNG", "BATCH 18", "RED WHITE BLUE"]
   return (
     <div className="relative overflow-hidden border-y border-white/5 py-4 bg-white/[0.01]">
       <div className="marquee-track whitespace-nowrap flex items-center gap-8">
