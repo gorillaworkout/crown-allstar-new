@@ -1,25 +1,24 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Crown Anniversary 2026 — Undangan | Crown Allstar",
+  title: "Crown Anniversary 2026 — Invitation | Crown Allstar",
   description:
-    "Undangan perayaan ulang tahun Crown Allstar, 26 September 2026 di Bandung. Special performance Angkatan 18, potong kue, tukar kado, dan doa bersama.",
+    "You're invited to the Crown Allstar anniversary celebration on 26 September 2026 in Bandung. Special performance by Batch 18, cake cutting, gift exchange, and a prayer together.",
   keywords: [
     "Crown Allstar anniversary 2026",
-    "ulang tahun Crown Allstar",
-    "undangan Crown Allstar Bandung",
-    "open recruitment angkatan 18",
+    "Crown Allstar invitation",
     "cheerleading Bandung",
+    "Crown Allstar Batch 18",
     "Crown Allstar 26 September 2026",
   ],
   openGraph: {
-    title: "Crown Anniversary 2026 — Undangan | Crown Allstar",
+    title: "Crown Anniversary 2026 — Invitation | Crown Allstar",
     description:
-      "26 September 2026, Bandung. Satu malam untuk semua anggota dan senior Crown: special performance Angkatan 18, potong kue, tukar kado, doa bersama.",
+      "26 September 2026, Bandung. One night for every Crown member and senior: Batch 18 special performance, cake cutting, gift exchange, prayer together.",
     url: "https://www.crownallstar.com/anniversary-2026",
     siteName: "Crown Allstar",
     type: "website",
-    locale: "id_ID",
+    locale: "en_US",
     images: [
       {
         url: "/og-anniversary-2026.jpg",
@@ -31,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Crown Anniversary 2026 — Undangan | Crown Allstar",
-    description: "26 September 2026, Bandung. Undangan untuk seluruh anggota dan senior Crown Allstar.",
+    title: "Crown Anniversary 2026 — Invitation | Crown Allstar",
+    description: "26 September 2026, Bandung. An invitation for every Crown member and senior.",
     images: ["/og-anniversary-2026.jpg"],
   },
   alternates: {

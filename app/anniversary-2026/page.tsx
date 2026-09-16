@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import WishWall from "@/components/wish-wall"
 import { useReveal } from "@/hooks/use-reveal"
 import { motion } from "framer-motion"
 import {
@@ -20,27 +21,21 @@ import {
   ChevronDown,
   Users,
   Medal,
-  ArrowRight,
 } from "lucide-react"
 
 /* ══════════════════════════════════════════════
-   EVENT CONSTANTS — edit di sini saja
+   EVENT CONSTANTS — edit here only
    ══════════════════════════════════════════════ */
 const EVENT = {
   dateISO: "2026-09-26T18:00:00+07:00",
   dateLabel: "26 September 2026",
-  dayLabel: "Sabtu",
-  timeLabel: "18.00 WIB",
+  dayLabel: "Saturday",
+  timeLabel: "6:00 PM",
   city: "Bandung",
-  venue: "Menyusul",
-  dresscode: "Smart casual — sentuhan hitam & emas",
-  giftNote: "Bawa satu kado untuk ditukar",
-  waNumber: "6281324420183",
+  venue: "To be announced",
+  dresscode: "Smart casual — a touch of black & gold",
+  giftNote: "Bring one gift to exchange",
 }
-
-const RSVP_URL = `https://wa.me/${EVENT.waNumber}?text=${encodeURIComponent(
-  "Halo Crown! Saya konfirmasi hadir di Crown Anniversary 26 September 2026 di Bandung.\n\nNama:\nAngkatan:"
-)}`
 
 /* ══════════════════════════════════════════════
    SPARKLE FIELD
@@ -82,7 +77,7 @@ function SparkleField({ count = 40, color = "#FFD700" }: { count?: number; color
 }
 
 /* ══════════════════════════════════════════════
-   COUNTDOWN — dihitung di client saja (hindari hydration mismatch)
+   COUNTDOWN — client-only to avoid hydration mismatch
    ══════════════════════════════════════════════ */
 function Countdown() {
   const [left, setLeft] = useState<{ d: number; h: number; m: number; s: number } | null>(null)
@@ -104,16 +99,19 @@ function Countdown() {
   }, [])
 
   const units = [
-    { label: "HARI", value: left?.d },
-    { label: "JAM", value: left?.h },
-    { label: "MENIT", value: left?.m },
-    { label: "DETIK", value: left?.s },
+    { label: "DAYS", value: left?.d },
+    { label: "HOURS", value: left?.h },
+    { label: "MINUTES", value: left?.m },
+    { label: "SECONDS", value: left?.s },
   ]
 
   return (
     <div className="flex items-center justify-center gap-3 sm:gap-5">
       {units.map((u) => (
-        <div key={u.label} className="min-w-[62px] sm:min-w-[84px] border border-[#FFD700]/20 bg-black/40 backdrop-blur-sm px-2 py-3 sm:px-4 sm:py-4">
+        <div
+          key={u.label}
+          className="min-w-[62px] sm:min-w-[84px] border border-[#FFD700]/20 bg-black/40 backdrop-blur-sm px-2 py-3 sm:px-4 sm:py-4"
+        >
           <p className="font-display text-3xl sm:text-5xl tracking-wider text-[#FFD700] tabular-nums">
             {u.value === undefined ? "—" : String(u.value).padStart(2, "0")}
           </p>
@@ -132,7 +130,7 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-28 pb-20">
       <Image
         src="/crown-team-2026-1.jpg"
-        alt="Tim Crown Allstar 2026 berkumpul bersama"
+        alt="Crown Allstar team 2026 together"
         fill
         priority
         sizes="100vw"
@@ -145,7 +143,6 @@ function HeroSection() {
       <SparkleField count={44} color="#FFD700" />
       <SparkleField count={16} color="white" />
 
-      {/* Gold glow bawah */}
       <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[560px] h-[280px] bg-[#FFD700]/[0.06] rounded-full blur-[110px]" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -156,7 +153,9 @@ function HeroSection() {
           className="inline-flex items-center gap-3 border border-[#FFD700]/25 bg-[#FFD700]/5 px-5 py-2 mb-8"
         >
           <Sparkles className="w-4 h-4 text-[#FFD700]" />
-          <span className="text-[#FFD700] text-[11px] sm:text-xs tracking-[0.3em] uppercase">Undangan Resmi</span>
+          <span className="text-[#FFD700] text-[11px] sm:text-xs tracking-[0.3em] uppercase">
+            You&apos;re Invited
+          </span>
           <Sparkles className="w-4 h-4 text-[#FFD700]" />
         </motion.div>
 
@@ -190,31 +189,18 @@ function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Satu malam untuk seluruh keluarga Crown — anggota aktif, senior, dan alumni.
-          Sekalian kita rayakan dibukanya <span className="text-white/80">Angkatan 18</span>.
+          One night for the whole Crown family — active members, seniors, and alumni.
+          We&apos;re also celebrating the arrival of <span className="text-white/80">Batch 18</span>.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.65 }}
-          className="mb-12"
+          className="mb-4"
         >
           <Countdown />
         </motion.div>
-
-        <motion.a
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.8 }}
-          href={RSVP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#FFD700] via-[#F5C000] to-[#FFD700] text-black font-semibold text-sm sm:text-base tracking-wide px-8 py-4 shadow-lg shadow-[#FFD700]/30 hover:shadow-xl hover:shadow-[#FFD700]/50 transition-all duration-300"
-        >
-          KONFIRMASI KEHADIRAN
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </motion.a>
 
         <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
           <div className="scroll-indicator">
@@ -227,14 +213,14 @@ function HeroSection() {
 }
 
 /* ══════════════════════════════════════════════
-   DETAIL
+   DETAILS
    ══════════════════════════════════════════════ */
 function DetailsSection() {
   const details = [
-    { icon: Calendar, label: "TANGGAL", value: "26 Sept", sub: `${EVENT.dayLabel}, 2026` },
-    { icon: Clock, label: "WAKTU", value: EVENT.timeLabel, sub: "Registrasi 30 menit sebelum" },
-    { icon: MapPin, label: "LOKASI", value: EVENT.city, sub: EVENT.venue },
-    { icon: Shirt, label: "DRESSCODE", value: "Black & Gold", sub: EVENT.dresscode },
+    { icon: Calendar, label: "DATE", value: "26 Sept", sub: `${EVENT.dayLabel}, 2026` },
+    { icon: Clock, label: "TIME", value: EVENT.timeLabel, sub: "Doors open 30 minutes earlier" },
+    { icon: MapPin, label: "LOCATION", value: EVENT.city, sub: EVENT.venue },
+    { icon: Shirt, label: "DRESS CODE", value: "Black & Gold", sub: EVENT.dresscode },
   ]
 
   return (
@@ -244,11 +230,11 @@ function DetailsSection() {
         <div className="text-center mb-16 reveal">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Crown className="w-5 h-5 text-[#FFD700]" />
-            <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">Detail Acara</span>
+            <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">Event Details</span>
             <Crown className="w-5 h-5 text-[#FFD700]" />
           </div>
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl tracking-wider text-white mb-4">
-            SATU MALAM, <span className="text-[#FFD700]">SATU KELUARGA</span>
+            ONE NIGHT, <span className="text-[#FFD700]">ONE FAMILY</span>
           </h2>
           <div className="gold-line mx-auto" />
         </div>
@@ -278,7 +264,7 @@ function DetailsSection() {
    MARQUEE
    ══════════════════════════════════════════════ */
 function MarqueeBanner() {
-  const words = ["CROWN ANNIVERSARY", "26 SEPTEMBER 2026", "BANDUNG", "ANGKATAN 18", "BLACK & GOLD"]
+  const words = ["CROWN ANNIVERSARY", "26 SEPTEMBER 2026", "BANDUNG", "BATCH 18", "BLACK & GOLD"]
   return (
     <div className="relative overflow-hidden border-y border-white/5 py-4 bg-white/[0.01]">
       <div className="marquee-track whitespace-nowrap flex items-center gap-8">
@@ -304,29 +290,29 @@ function RundownSection() {
       icon: Medal,
       no: "01",
       title: "SPECIAL PERFORMANCE",
-      by: "Angkatan 18",
-      desc: "Penampilan perdana dari wajah-wajah baru Crown. Momen pertama mereka di panggung keluarga sendiri.",
+      by: "Batch 18",
+      desc: "The debut of Crown's newest faces — their first time on stage in front of their own family.",
     },
     {
       icon: Cake,
       no: "02",
-      title: "POTONG KUE",
-      by: "Bersama",
-      desc: "Tiup lilin dan potong kue bareng — anggota aktif, senior, dan alumni dalam satu frame.",
+      title: "CAKE CUTTING",
+      by: "Everyone",
+      desc: "Candles, cake, and one frame with active members, seniors, and alumni all together.",
     },
     {
       icon: Gift,
       no: "03",
-      title: "TUKAR KADO",
-      by: "Semua yang hadir",
-      desc: EVENT.giftNote + ". Tanpa nama, diacak di tempat, dibuka bersama.",
+      title: "GIFT EXCHANGE",
+      by: "All guests",
+      desc: `${EVENT.giftNote}. No names on them, shuffled on the spot, opened together.`,
     },
     {
       icon: HandHeart,
       no: "04",
-      title: "DOA BERSAMA",
-      by: "Penutup",
-      desc: "Menutup malam dengan doa untuk Crown — untuk yang sudah pergi jauh, dan yang baru mulai.",
+      title: "PRAYER TOGETHER",
+      by: "Closing",
+      desc: "We close the night with a prayer for Crown — for those who moved on, and those just starting.",
     },
   ]
 
@@ -341,7 +327,7 @@ function RundownSection() {
             <Sparkles className="w-5 h-5 text-[#FFD700]" />
           </div>
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl tracking-wider text-white mb-4">
-            AGENDA <span className="text-[#FFD700]">MALAM ITU</span>
+            THE <span className="text-[#FFD700]">AGENDA</span>
           </h2>
           <div className="gold-line mx-auto" />
         </div>
@@ -374,7 +360,7 @@ function RundownSection() {
         </div>
 
         <p className="reveal text-center text-white/25 text-xs tracking-wider mt-8">
-          Susunan acara dapat bergeser sedikit di lapangan.
+          The running order may shift slightly on the night.
         </p>
       </div>
     </section>
@@ -382,19 +368,19 @@ function RundownSection() {
 }
 
 /* ══════════════════════════════════════════════
-   UNTUK SIAPA
+   GUESTS
    ══════════════════════════════════════════════ */
 function GuestsSection() {
   const guests = [
     {
       icon: Users,
-      title: "ANGGOTA AKTIF",
-      desc: "Semua divisi — Premier, All Girl, C4, dan Angkatan 18. Datang lengkap, ini rumah kalian.",
+      title: "ACTIVE MEMBERS",
+      desc: "Every division — Premier, All Girl, C4, and Batch 18. Come as a full squad; this is your house.",
     },
     {
       icon: Crown,
-      title: "SENIOR & ALUMNI",
-      desc: "Yang pernah pakai seragam Crown, kapan pun angkatannya. Pintunya selalu terbuka — pulang dulu ke Bandung.",
+      title: "SENIORS & ALUMNI",
+      desc: "Anyone who ever wore the Crown uniform, whatever the batch. The door is always open — come home to Bandung.",
     },
   ]
 
@@ -404,7 +390,7 @@ function GuestsSection() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="text-center mb-16 reveal">
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl tracking-wider text-white mb-4">
-            UNDANGAN <span className="text-[#FFD700]">UNTUK</span>
+            WHO&apos;S <span className="text-[#FFD700]">INVITED</span>
           </h2>
           <div className="gold-line mx-auto" />
         </div>
@@ -432,13 +418,13 @@ function GuestsSection() {
 }
 
 /* ══════════════════════════════════════════════
-   GALERI
+   GALLERY
    ══════════════════════════════════════════════ */
 function GallerySection() {
   const photos = [
-    { src: "/crown-team-2026-1.jpg", alt: "Tim Crown Allstar 2026" },
-    { src: "/crown-team-2026-2.jpg", alt: "Kebersamaan tim Crown Allstar 2026" },
-    { src: "/crown-team-2026-3.jpg", alt: "Squad Crown Allstar 2026" },
+    { src: "/crown-team-2026-1.jpg", alt: "Crown Allstar team 2026" },
+    { src: "/crown-team-2026-2.jpg", alt: "Crown Allstar 2026 togetherness" },
+    { src: "/crown-team-2026-3.jpg", alt: "Crown Allstar squad 2026" },
   ]
 
   return (
@@ -446,16 +432,19 @@ function GallerySection() {
       <div className="absolute inset-0 bg-black" />
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16 reveal">
-          <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">Keluarga Crown</span>
+          <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">The Crown Family</span>
           <h2 className="font-display text-4xl sm:text-5xl tracking-wider text-white mt-4 mb-4">
-            WAJAH <span className="text-[#FFD700]">CROWN 2026</span>
+            FACES OF <span className="text-[#FFD700]">CROWN 2026</span>
           </h2>
           <div className="gold-line mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {photos.map((p, i) => (
-            <div key={p.src} className={`reveal reveal-delay-${i + 1} relative aspect-[4/5] border border-white/5 overflow-hidden`}>
+            <div
+              key={p.src}
+              className={`reveal reveal-delay-${i + 1} relative aspect-[4/5] border border-white/5 overflow-hidden`}
+            >
               <Image
                 src={p.src}
                 alt={p.alt}
@@ -468,79 +457,42 @@ function GallerySection() {
           ))}
         </div>
 
-        <p className="reveal text-center text-white/25 text-xs tracking-[0.2em] mt-6">
-          KELUARGA CROWN 2026
-        </p>
+        <p className="reveal text-center text-white/25 text-xs tracking-[0.2em] mt-6">CROWN FAMILY 2026</p>
       </div>
     </section>
   )
 }
 
 /* ══════════════════════════════════════════════
-   RSVP
+   CLOSING
    ══════════════════════════════════════════════ */
-function RsvpSection() {
+function ClosingSection() {
   return (
-    <section className="relative py-28 sm:py-40 px-6 overflow-hidden">
+    <section className="relative py-28 sm:py-36 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0d0b02] to-black" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-[#FFD700]/[0.04] rounded-full blur-[120px] mystery-pulse" />
       <SparkleField count={24} color="#FFD700" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="inline-flex items-center gap-3 border border-[#FFD700]/25 bg-[#FFD700]/5 px-6 py-2 mb-8"
-        >
-          <Star className="w-4 h-4 text-[#FFD700] fill-[#FFD700]" />
-          <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">RSVP</span>
-          <Star className="w-4 h-4 text-[#FFD700] fill-[#FFD700]" />
-        </motion.div>
-
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.15 }}
+          transition={{ duration: 0.8 }}
           className="font-display text-4xl sm:text-6xl tracking-wider text-white mb-6"
         >
-          KAMI TUNGGU <span className="text-[#FFD700]">KEHADIRANMU</span>
+          SEE YOU <span className="text-[#FFD700]">THERE</span>
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-white/45 text-base sm:text-lg mb-3"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-white/45 text-base sm:text-lg"
         >
-          Konfirmasi lewat WhatsApp — sebutkan nama dan angkatan.
+          {EVENT.dayLabel}, {EVENT.dateLabel} — {EVENT.city}. Bring a gift, bring your voice.
         </motion.p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-white/30 text-sm mb-10"
-        >
-          Batas konfirmasi: 20 September 2026 — biar kue dan kado cukup.
-        </motion.p>
-
-        <motion.a
-          initial={{ opacity: 0, scale: 0.94 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          href={RSVP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#FFD700] via-[#F5C000] to-[#FFD700] text-black font-semibold text-sm sm:text-base tracking-wide px-10 py-4 shadow-lg shadow-[#FFD700]/30 hover:shadow-xl hover:shadow-[#FFD700]/50 transition-all duration-300"
-        >
-          KONFIRMASI VIA WHATSAPP
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </motion.a>
 
         <div className="flex items-center justify-center gap-4 mt-14">
           <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#FFD700]/25" />
@@ -562,29 +514,15 @@ export default function Anniversary2026Page() {
   return (
     <>
       <Header />
-
-      {/* Sticky RSVP banner */}
-      <div className="sticky top-20 z-40">
-        <a
-          href={RSVP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-[#FFD700] via-[#F5C000] to-[#FFD700] text-black font-semibold text-xs sm:text-sm tracking-wide shadow-lg shadow-[#FFD700]/40 hover:from-[#FFF040] hover:to-[#FFF040] transition-all duration-300 border-b border-[#FFD700]/50"
-        >
-          <Star className="w-4 h-4 fill-current mr-2 shrink-0" />
-          <span className="text-center">CROWN ANNIVERSARY • 26 SEPT 2026 • BANDUNG — KONFIRMASI HADIR</span>
-          <Star className="w-4 h-4 fill-current ml-2 shrink-0" />
-        </a>
-      </div>
-
       <main>
         <HeroSection />
         <DetailsSection />
         <MarqueeBanner />
         <RundownSection />
         <GuestsSection />
+        <WishWall />
         <GallerySection />
-        <RsvpSection />
+        <ClosingSection />
       </main>
       <Footer />
     </>
