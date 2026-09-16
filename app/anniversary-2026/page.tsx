@@ -131,12 +131,12 @@ function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-28 pb-20">
       <Image
-        src="/crown-coed-2025.jpg"
-        alt="Tim Crown Allstar di atas panggung"
+        src="/crown-team-2026-1.jpg"
+        alt="Tim Crown Allstar 2026 berkumpul bersama"
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-center scale-105 blur-[2px]"
       />
       <div className="absolute inset-0 bg-black/75" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
@@ -436,10 +436,9 @@ function GuestsSection() {
    ══════════════════════════════════════════════ */
 function GallerySection() {
   const photos = [
-    { src: "/crown-gold-bangkok-2025.jpg", alt: "Crown Allstar meraih emas di Bangkok 2025" },
-    { src: "/crown-allgirl-2025.jpg", alt: "Divisi All Girl Crown Allstar 2025" },
-    { src: "/crown-icu-asian-2025.jpg", alt: "Crown Allstar di ICU Asian Championship 2025" },
-    { src: "/crown-bico-2023-team.jpg", alt: "Tim Crown Allstar di BICO 2023" },
+    { src: "/crown-team-2026-1.jpg", alt: "Tim Crown Allstar 2026" },
+    { src: "/crown-team-2026-2.jpg", alt: "Kebersamaan tim Crown Allstar 2026" },
+    { src: "/crown-team-2026-3.jpg", alt: "Squad Crown Allstar 2026" },
   ]
 
   return (
@@ -447,26 +446,31 @@ function GallerySection() {
       <div className="absolute inset-0 bg-black" />
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16 reveal">
-          <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">Perjalanan Kita</span>
+          <span className="text-[#FFD700] text-xs tracking-[0.3em] uppercase">Keluarga Crown</span>
           <h2 className="font-display text-4xl sm:text-5xl tracking-wider text-white mt-4 mb-4">
-            YANG SUDAH <span className="text-[#FFD700]">KITA LEWATI</span>
+            WAJAH <span className="text-[#FFD700]">CROWN 2026</span>
           </h2>
           <div className="gold-line mx-auto" />
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {photos.map((p, i) => (
-            <div key={p.src} className={`reveal reveal-delay-${i + 1} img-zoom relative aspect-[3/4] border border-white/5`}>
+            <div key={p.src} className={`reveal reveal-delay-${i + 1} relative aspect-[4/5] border border-white/5 overflow-hidden`}>
               <Image
                 src={p.src}
                 alt={p.alt}
                 fill
-                sizes="(max-width: 1024px) 50vw, 25vw"
-                className="object-cover opacity-70 hover:opacity-100 transition-opacity duration-500"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="object-cover object-center hover:scale-105 transition-transform duration-700"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
           ))}
         </div>
+
+        <p className="reveal text-center text-white/25 text-xs tracking-[0.2em] mt-6">
+          KELUARGA CROWN 2026
+        </p>
       </div>
     </section>
   )

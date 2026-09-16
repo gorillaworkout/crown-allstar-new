@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: "id_ID",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-anniversary-2026.jpg",
         width: 1200,
         height: 630,
         alt: "Crown Allstar Anniversary 2026 — 26 September, Bandung",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Crown Anniversary 2026 — Undangan | Crown Allstar",
     description: "26 September 2026, Bandung. Undangan untuk seluruh anggota dan senior Crown Allstar.",
-    images: ["/og-image.jpg"],
+    images: ["/og-anniversary-2026.jpg"],
   },
   alternates: {
     canonical: "https://www.crownallstar.com/anniversary-2026",
