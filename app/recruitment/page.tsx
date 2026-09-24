@@ -10,10 +10,10 @@ import { DIVISIONS, windowState } from '@/lib/recruitment';
 export const metadata: Metadata = {
   title: { absolute: 'Open Recruitment Batch 18 | Crown Allstar Cheerleading' },
   description:
-    'Crown Allstar Batch 18 open recruitment, 13-21 August 2026. Free to join, no experience required. All Girl, C4 and Premier divisions.',
+    'Crown Allstar Batch 18 open recruitment, registration closes 30 September 2026. Free to join, no experience required. All Girl, C4 and Premier divisions.',
   openGraph: {
     title: 'Open Recruitment Crown Allstar Batch 18',
-    description: '13-21 August 2026. Free. No experience required.',
+    description: 'Registration closes 30 September 2026. Free. No experience required.',
   },
 };
 
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 const TIMELINE = [
-  { date: '13 AUG', label: 'Registration opens', done: false },
-  { date: '21 AUG', label: 'Registration closes', done: false },
+  { date: '23 SEP', label: 'Registration reopens', done: false },
+  { date: '30 SEP', label: 'Registration closes', done: false },
   { date: 'TBA', label: 'Auditions & selection', done: false },
   { date: 'TBA', label: 'Results announced', done: false },
 ];
@@ -113,7 +113,7 @@ export default function RecruitmentPage() {
                   NO EXPERIENCE NEEDED
                 </span>
                 <span className="border border-white/15 px-3.5 py-2 text-white/60">
-                  13—21 AUGUST
+                  23—30 SEPTEMBER
                 </span>
               </div>
 

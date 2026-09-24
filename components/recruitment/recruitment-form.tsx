@@ -211,8 +211,8 @@ export default function RecruitmentForm({ windowState: ws }: { windowState: Wind
         </p>
         <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/50">
           {ws === 'before'
-            ? 'The form activates automatically on 12 August 2026. Get your details ready.'
-            : 'Batch 18 registration closed on 21 August 2026. Follow our Instagram for the next opportunity.'}
+            ? 'The form activates automatically on 23 September 2026. Get your details ready.'
+            : 'Batch 18 registration closes on 30 September 2026. Follow our Instagram for updates.'}
         </p>
       </div>
     );

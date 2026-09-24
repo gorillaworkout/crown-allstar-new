@@ -1,6 +1,6 @@
 // Self-check for recruitment rules. Run: node tests/recruitment.test.mjs
 // Rules come straight from Bayu: All Girl 13+ (P only), C4 13+ (P/L), Premier 15+ (P/L),
-// window 13-21 Aug 2026 WIB.
+// second opening window: 23-30 Sep 2026 WIB.
 
 import assert from 'node:assert/strict';
 
@@ -10,8 +10,8 @@ const DIVISIONS = [
   { id: 'c4', name: 'C4', minAge: 13, genders: ['perempuan', 'laki-laki'] },
   { id: 'premier', name: 'PREMIER', minAge: 15, genders: ['perempuan', 'laki-laki'] },
 ];
-const OPEN_AT = new Date('2026-08-01T00:00:00+07:00'); // opened early for testing
-const CLOSE_AT = new Date('2026-08-21T23:59:59.999+07:00');
+const OPEN_AT = new Date('2026-09-23T00:00:00+07:00');
+const CLOSE_AT = new Date('2026-09-30T23:59:59.999+07:00');
 
 function ageAt(birthDate, on = new Date()) {
   const b = new Date(`${birthDate}T00:00:00+07:00`);
@@ -47,11 +47,11 @@ function normalizeWhatsapp(input) {
 }
 
 // ── Age ──────────────────────────────────────────────────────────────────────
-const ref = new Date('2026-08-13T12:00:00+07:00');
-assert.equal(ageAt('2009-08-13', ref), 17, 'birthday today counts');
-assert.equal(ageAt('2009-08-14', ref), 16, 'birthday tomorrow does not count yet');
-assert.equal(ageAt('2013-08-12', ref), 13, 'just turned 13 → eligible age');
-assert.equal(ageAt('2013-08-14', ref), 12, 'turns 13 in two days → still 12');
+const ref = new Date('2026-09-23T12:00:00+07:00');
+assert.equal(ageAt('2009-09-23', ref), 17, 'birthday today counts');
+assert.equal(ageAt('2009-09-25', ref), 16, 'birthday after today does not count yet');
+assert.equal(ageAt('2013-09-22', ref), 13, 'just turned 13 → eligible age');
+assert.equal(ageAt('2013-09-25', ref), 12, 'turns 13 after today → still 12');
 assert.equal(ageAt('not-a-date', ref), -1, 'invalid date is rejected');
 
 // ── Division eligibility matrix ──────────────────────────────────────────────
@@ -80,13 +80,13 @@ assert.deepEqual(
 );
 
 // ── Window state (WIB boundaries) ────────────────────────────────────────────
-assert.equal(windowState(new Date('2026-07-31T23:59:00+07:00')), 'before');
-assert.equal(windowState(new Date('2026-08-01T00:00:00+07:00')), 'open', 'opens exactly 1 Aug');
-assert.equal(windowState(new Date('2026-08-11T12:00:00+07:00')), 'open', 'open today for testing');
-assert.equal(windowState(new Date('2026-08-21T23:59:00+07:00')), 'open', 'still open on 21 Aug');
-assert.equal(windowState(new Date('2026-08-22T00:01:00+07:00')), 'closed');
+assert.equal(windowState(new Date('2026-09-22T23:59:00+07:00')), 'before');
+assert.equal(windowState(new Date('2026-09-23T00:00:00+07:00')), 'open', 'reopens exactly 23 Sep');
+assert.equal(windowState(new Date('2026-09-25T12:00:00+07:00')), 'open', 'open during second opening');
+assert.equal(windowState(new Date('2026-09-30T23:59:00+07:00')), 'open', 'still open on 30 Sep');
+assert.equal(windowState(new Date('2026-10-01T00:01:00+07:00')), 'closed');
 // A registrant in WIT (UTC+9) at 01:00 on 13 Aug local = 23:00 12 Aug WIB → still 'before'.
-assert.equal(windowState(new Date('2026-08-01T01:00:00+09:00')), 'before', 'WIB is authoritative');
+assert.equal(windowState(new Date('2026-09-23T01:00:00+09:00')), 'before', 'WIB is authoritative');
 
 // ── Registration number ──────────────────────────────────────────────────────
 assert.equal(regNumber(1), 'CA18-0001');

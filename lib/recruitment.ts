@@ -4,11 +4,9 @@
 export const BATCH = 18;
 
 // Window is fixed to WIB (UTC+7) so registrants in WITA/WIT aren't cut off early.
-// 13 Aug 2026 00:00 WIB → 21 Aug 2026 23:59:59.999 WIB
-// Opened early at Bayu's request so the live form can be tested before 13 Aug.
-// To restore the announced window, set this back to 2026-08-13T00:00:00+07:00.
-export const OPEN_AT = new Date('2026-08-01T00:00:00+07:00');
-export const CLOSE_AT = new Date('2026-08-21T23:59:59.999+07:00');
+// Second opening: 23 Sep 2026 00:00 WIB → 30 Sep 2026 23:59:59.999 WIB.
+export const OPEN_AT = new Date('2026-09-23T00:00:00+07:00');
+export const CLOSE_AT = new Date('2026-09-30T23:59:59.999+07:00');
 
 export type Division = 'all-girl' | 'c4' | 'premier';
 export type Gender = 'perempuan' | 'laki-laki';
