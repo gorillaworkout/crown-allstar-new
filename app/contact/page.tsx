@@ -86,10 +86,10 @@ ${formData.message}`
                     EMAIL
                   </h3>
                   <a
-                    href="mailto:contact.crownallstar@gmail.com"
+                    href="mailto:bayu.darmawan@crownallstar.com"
                     className="text-white text-lg hover:text-[hsl(45,93%,58%)] transition-colors"
                   >
-                    contact.crownallstar@gmail.com
+                    bayu.darmawan@crownallstar.com
                   </a>
                 </div>
 

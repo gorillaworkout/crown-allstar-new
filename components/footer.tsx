@@ -91,8 +91,8 @@ export default function Footer() {
               <a href="https://wa.me/6281324420183" className="hover:text-white transition-colors">
                 +62 851-3352-4900
               </a>
-              <a href="mailto:contact.crownallstar@gmail.com" className="hover:text-white transition-colors">
-                contact.crownallstar@gmail.com
+              <a href="mailto:bayu.darmawan@crownallstar.com" className="hover:text-white transition-colors">
+                bayu.darmawan@crownallstar.com
               </a>
             </div>
           </div>
